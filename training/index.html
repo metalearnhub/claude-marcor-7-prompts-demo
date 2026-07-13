@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+
+<!-- SEO Meta Tags -->
+<title>Chatbot Authority: Whisper &amp; Launch — Dijae Dadula</title>
+<meta property="og:title" content="Chatbot Authority: Whisper &amp; Launch — Dijae Dadula" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Chatbot Authority: Whisper &amp; Launch — Dijae Dadula" />
+<!-- End SEO Meta Tags -->
+<script data-lp-token-hydrate>
+(function(){try{
+  var slug="lp-mr617l2n-swpx0";
+  var SK='lp_access_'+slug;
+  var map={access_token:'lp_pw_',allowlist_access_token:'lp_al_',pin_access_token:'lp_pin_',paywall_access_token:'lp_paid_'};
+  var u=new URL(location.href);var found=null;var changed=false;
+  Object.keys(map).forEach(function(p){var v=u.searchParams.get(p);if(v){found=v;try{localStorage.setItem(map[p]+slug,v);}catch(e){}u.searchParams.delete(p);changed=true;}});
+  if(found){try{sessionStorage.setItem(SK,found);}catch(e){}}
+  else{try{if(!sessionStorage.getItem(SK)){var t=localStorage.getItem('lp_pw_'+slug)||localStorage.getItem('lp_al_'+slug)||localStorage.getItem('lp_pin_'+slug)||localStorage.getItem('lp_paid_'+slug);if(t)sessionStorage.setItem(SK,t);}}catch(e){}}
+  if(changed){try{history.replaceState(null,'',u.toString());}catch(e){}}
+  function getTok(){try{return sessionStorage.getItem(SK)||localStorage.getItem('lp_pw_'+slug)||localStorage.getItem('lp_al_'+slug)||localStorage.getItem('lp_pin_'+slug)||localStorage.getItem('lp_paid_'+slug);}catch(e){return null;}}
+  function needsToken(url,method){if(!url)return false;var s=String(url);var m=(method||'GET').toUpperCase();var isSheetWrite=(m==='POST'||m==='PATCH'||m==='PUT'||m==='DELETE')&&/\/sheet-rows(\/|$|\?)/.test(s);var isSheetRead=/\/sheet-data(\/|$|\?)/.test(s);var isLlm=/\/api\/landing-pages\/public\/[^/]+\/(llm|llm-config)(\/|$|\?)/.test(s);return isSheetWrite||isSheetRead||isLlm;}
+  if(window.fetch){var _f=window.fetch;window.fetch=function(input,init){try{var url=typeof input==='string'?input:(input&&input.url)||'';var method=(init&&init.method)||(input&&input.method)||'GET';if(needsToken(url,method)){var tok=getTok();if(tok){init=init||{};var h=new Headers(init.headers||(typeof input!=='string'?input.headers:undefined)||{});if(!h.has('X-Landing-Page-Token'))h.set('X-Landing-Page-Token',tok);init.headers=h;}}}catch(e){}return _f.call(this,input,init);};}
+  if(window.XMLHttpRequest){var _o=XMLHttpRequest.prototype.open;var _s=XMLHttpRequest.prototype.send;XMLHttpRequest.prototype.open=function(m,u){this.__lpM=m;this.__lpU=u;return _o.apply(this,arguments);};XMLHttpRequest.prototype.send=function(){try{if(needsToken(this.__lpU,this.__lpM)){var tok=getTok();if(tok)this.setRequestHeader('X-Landing-Page-Token',tok);}}catch(e){}return _s.apply(this,arguments);};}
+}catch(e){}})();
+</script>
+
+<script data-field-replace>
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var fields={};
+  var paramMap={
+    'first_name':'firstName','last_name':'lastName','full_name':'fullName',
+    'email':'email','phone':'phone','company':'company',
+    'city':'city','state':'state','country':'country'
+  };
+  var skipTags={'SCRIPT':1,'STYLE':1,'NOSCRIPT':1,'TEXTAREA':1,'CODE':1,'PRE':1};
+  var hasUrlFields=false;
+  for(var p in paramMap){
+    var v=params.get(p);
+    if(v){fields[paramMap[p]]=v;hasUrlFields=true;}
+  }
+  var contactId=params.get('contact_id');
+  function esc(s){
+    if(!s)return s;
+    var d=document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+  function doReplace(data){
+    var r={};
+    r['{{full_name}}']=esc(((data.firstName||'')+' '+(data.lastName||'')).trim()||((data.fullName||data.name)||''));
+    r['{{first_name}}']=esc(data.firstName||(data.name?data.name.split(' ')[0]:'')||'');
+    r['{{last_name}}']=esc(data.lastName||(data.name&&data.name.indexOf(' ')>-1?data.name.substring(data.name.indexOf(' ')+1):'')||'');
+    r['{{email}}']=esc(data.email||'');
+    r['{{phone}}']=esc(data.phone||'');
+    r['{{company}}']=esc(data.company||'');
+    r['{{city}}']=esc(data.city||'');
+    r['{{state}}']=esc(data.state||'');
+    r['{{country}}']=esc(data.country||'');
+    r['{{date}}']=new Date().toLocaleDateString();
+    r['{{time}}']=new Date().toLocaleTimeString();
+    r['{{location}}']=[data.city,data.state,data.country].filter(Boolean).join(', ');
+    r['{{tracking_id}}']=esc(data.trackingId||'');
+    r['{{lastClickedProduct}}']=esc(data.lastClickedProduct||'');
+    r['{{lastProductClickDate}}']=esc(data.lastProductClickDate||'');
+    r['{{lastClickedProductPrice}}']=esc(data.lastClickedProductPrice||'');
+    r['{{lastClickedProductURL}}']=esc(data.lastClickedProductURL||'');
+    r['{{productsClickedCount}}']=esc(data.productsClickedCount||'0');
+    r['{{ip_address}}']=esc(data.ipAddress||'');
+    r['{{ip}}']=esc(data.ipAddress||'');
+    if(data.customFields){
+      for(var k in data.customFields){
+        r['{{'+k+'}}']=esc(String(data.customFields[k]||''));
+      }
+    }
+    params.forEach(function(v,k){
+      if(!paramMap[k]&&k!=='contact_id'&&k!=='page_id'&&k.indexOf('utm_')!==0){
+        r['{{'+k+'}}']=esc(v);
+      }
+    });
+    var hasValues=false;
+    for(var key in r){if(r[key]){hasValues=true;break;}}
+    if(!hasValues)return;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(n){
+        var p=n.parentNode;
+        if(p&&skipTags[p.nodeName])return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var node;
+    while(node=walker.nextNode()){
+      var txt=node.nodeValue;
+      if(txt&&txt.indexOf('{{')>-1){
+        var changed=txt;
+        for(var ph in r){
+          if(r[ph]&&changed.indexOf(ph)>-1){
+            changed=changed.split(ph).join(r[ph]);
+          }
+        }
+        if(changed!==txt)node.nodeValue=changed;
+      }
+    }
+    var attrs=['value','placeholder','content','alt','title'];
+    attrs.forEach(function(attr){
+      var els=document.querySelectorAll('['+attr+'*="{{"]');
+      for(var i=0;i<els.length;i++){
+        var tag=els[i].tagName;
+        if(skipTags[tag])continue;
+        var val=els[i].getAttribute(attr);
+        if(val){
+          var nv=val;
+          for(var ph in r){
+            if(r[ph]&&nv.indexOf(ph)>-1){
+              nv=nv.split(ph).join(r[ph]);
+            }
+          }
+          if(nv!==val)els[i].setAttribute(attr,nv);
+        }
+      }
+    });
+  }
+  function run(){
+    if(contactId){
+      var xhr=new XMLHttpRequest();
+      xhr.open('GET','https://studio.marcor.app/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=5335');
+      xhr.onload=function(){
+        if(xhr.status===200){
+          try{
+            var resp=JSON.parse(xhr.responseText);
+            if(resp.success&&resp.contact){
+              var merged=resp.contact;
+              for(var k in fields){merged[k]=fields[k];}
+              doReplace(merged);
+              return;
+            }
+          }catch(e){}
+        }
+        if(hasUrlFields)doReplace(fields);
+      };
+      xhr.onerror=function(){if(hasUrlFields)doReplace(fields);};
+      xhr.send();
+    }else if(hasUrlFields){
+      doReplace(fields);
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}
+  else{run();}
+})();
+</script>
+<script data-payment>
+(function(){
+  var slug='2xfxs7m';
+  var apiBase='https://studio.marcor.app';
+  var successSubtext='';var successBtnLabel='Continue';var successBtnColor='#16a34a';var successRedirect='';
+  function findEmail(){
+    var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
+    var inputs=document.querySelectorAll('input[type="email"],input[name*="email"],input[placeholder*="email"],input[placeholder*="Email"]');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.includes('@'))return inputs[j].value.trim();}
+    return '';
+  }
+  function findName(){
+    var ids=['name','fullName','full-name','buyer-name','buyerName','customer-name','userName','user-name'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value)return el.value.trim();}
+    var inputs=document.querySelectorAll('input[name*="name"]:not([name*="email"]):not([type="email"]),input[placeholder*="name"]:not([placeholder*="email"]):not([type="email"]),input[placeholder*="Name"]:not([type="email"])');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value)return inputs[j].value.trim();}
+    return '';
+  }
+  function findPhone(){var ids=['phone','phoneNumber','phone-number','tel','telephone','mobile','mobileNumber','cell','contact-phone','buyer-phone'];for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.trim())return el.value.trim();}var inputs=document.querySelectorAll('input[type="tel"],input[name*="phone"],input[name*="tel"],input[name*="mobile"],input[placeholder*="phone"],input[placeholder*="Phone"]');for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.trim())return inputs[j].value.trim();}return '';}
+  var __realProcessPayment=function(a,b,c,d,e){
+    var amountCents,email,productName,productDescription,customerName,quantity;
+    if(a&&typeof a==='object'){
+      amountCents=a.amountCents;email=a.email;productName=a.productName;
+      productDescription=a.productDescription||'';customerName=a.name||'';quantity=a.quantity||1;
+    }else{
+      amountCents=typeof a==='number'?a:0;productName=typeof b==='string'?b:'';
+      productDescription=typeof c==='string'?c:'';email='';customerName='';quantity=1;
+    }
+    if(!email)email=findEmail();
+    if(!customerName)customerName=findName();
+    var phone=findPhone();
+    if(!productName){alert('Product name is required.');return Promise.reject('no_product_name');}
+    if(!amountCents||amountCents<100){alert('Amount must be at least $1.00');return Promise.reject('invalid_amount');}
+    if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
+    var successBase=window.location.href.split('?')[0];
+    var __pLoc=(document.documentElement.lang||navigator.language||'en');
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/payment/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,name:customerName,phone:phone||'',amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,locale:__pLoc,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process payment');throw new Error(d.error);}
+    });
+  };
+  Object.defineProperty(window,'__processPayment',{value:__realProcessPayment,writable:false,configurable:false});
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('payment')==='success'){
+      var sidP=urlParams.get('session_id');
+      if(sidP){try{fetch(apiBase+'/api/landing-pages/public/'+slug+'/checkout/confirm',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:sidP})}).catch(function(){});}catch(e){}}
+      var pName=urlParams.get('product')||'your item';
+      var overlay=document.createElement('div');overlay.id='payment-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+      var subTxt=successSubtext||('Thank you for purchasing '+pName+'.');
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">'+esc(subTxt)+'</p><button id="lp-pay-success-btn" style="padding:12px 32px;font-size:16px;font-weight:600;background:'+successBtnColor+';color:white;border:none;border-radius:8px;cursor:pointer;">'+esc(successBtnLabel)+'</button></div>';
+      document.body.appendChild(overlay);
+      var pBtn=document.getElementById('lp-pay-success-btn');
+      if(pBtn){pBtn.addEventListener('click',function(){if(successRedirect){window.location.href=successRedirect;}else{overlay.remove();window.history.replaceState({},'',window.location.pathname);}});}
+    }
+  });
+})();
+</script>
+<script data-cart>
+(function(){
+  var slug='2xfxs7m';
+  var apiBase='https://studio.marcor.app';
+  var successSubtext='';var successBtnLabel='Continue';var successBtnColor='#16a34a';var successRedirect='';
+  function findCartEmail(){
+    var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
+    var inputs=document.querySelectorAll('input[type="email"],input[name*="email"],input[placeholder*="email"],input[placeholder*="Email"]');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.includes('@'))return inputs[j].value.trim();}
+    return '';
+  }
+  function findCartName(){
+    var ids=['name','fullName','full-name','buyer-name','buyerName','customer-name','userName','user-name'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value)return el.value.trim();}
+    var inputs=document.querySelectorAll('input[name*="name"]:not([name*="email"]):not([type="email"]),input[placeholder*="name"]:not([placeholder*="email"]):not([type="email"]),input[placeholder*="Name"]:not([type="email"])');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value)return inputs[j].value.trim();}
+    return '';
+  }
+  function findCartPhone(){var ids=['phone','phoneNumber','phone-number','tel','telephone','mobile','mobileNumber','cell','contact-phone','buyer-phone'];for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.trim())return el.value.trim();}var inputs=document.querySelectorAll('input[type="tel"],input[name*="phone"],input[name*="tel"],input[name*="mobile"],input[placeholder*="phone"],input[placeholder*="Phone"]');for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.trim())return inputs[j].value.trim();}return '';}
+  var __realCart=function(arg){
+    var items, email='', customerName='', successUrl, cancelUrl, currency;
+    if(Array.isArray(arg)){items=arg;}
+    else if(arg&&typeof arg==='object'){
+      items=arg.items;email=arg.email||'';customerName=arg.name||arg.customerName||'';
+      successUrl=arg.successUrl;cancelUrl=arg.cancelUrl;currency=arg.currency;
+    }
+    if(!Array.isArray(items)||items.length===0){alert('No items in cart.');return Promise.reject('no_items');}
+    var cleanItems=[];var totalCents=0;
+    for(var i=0;i<items.length;i++){
+      var it=items[i];if(!it||typeof it!=='object'){alert('Invalid item at position '+i);return Promise.reject('bad_item');}
+      var nm=typeof it.name==='string'?it.name.trim():'';
+      if(!nm){alert('Item '+(i+1)+' is missing a name.');return Promise.reject('no_name');}
+      var amt=typeof it.amountCents==='number'?it.amountCents:(typeof it.amount==='number'?Math.round(it.amount*100):NaN);
+      if(!isFinite(amt)||amt<1){alert('Item "'+nm+'" needs a valid amount in cents.');return Promise.reject('bad_amount');}
+      var qty=(typeof it.quantity==='number'&&it.quantity>0)?Math.floor(it.quantity):1;
+      cleanItems.push({name:nm,description:it.description||'',amountCents:amt,quantity:qty});
+      totalCents+=amt*qty;
+    }
+    if(totalCents<50){alert('Cart total must be at least $0.50');return Promise.reject('total_too_low');}
+    if(!email)email=findCartEmail();
+    if(!customerName)customerName=findCartName();
+    var cartPhone=findCartPhone();
+    if(!email){var p=window.prompt('Enter your email for the receipt:','');if(p&&p.indexOf('@')>-1){email=p.trim();}else{alert('An email address is required to complete checkout.');return Promise.reject('no_email');}}
+    var successBase=window.location.href.split('?')[0];
+    var body={email:email,name:customerName,items:cleanItems,locale:(document.documentElement.lang||navigator.language||'en')};
+    if(currency)body.currency=currency;
+    if(cartPhone)body.phone=cartPhone;
+    body.successUrl=successUrl||(successBase+'?cart=success&email='+encodeURIComponent(email)+'&session_id={CHECKOUT_SESSION_ID}');
+    body.cancelUrl=cancelUrl||(successBase+'?cart=cancelled');
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/cart/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process checkout');throw new Error(d.error);}
+    });
+  };
+  try{Object.defineProperty(window,'__processCart',{value:__realCart,writable:false,configurable:false});}catch(e){window.__processCart=__realCart;}
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('cart')==='success'){
+      var sidC=urlParams.get('session_id');
+      if(sidC){try{fetch(apiBase+'/api/landing-pages/public/'+slug+'/checkout/confirm',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:sidC})}).catch(function(){});}catch(e){}}
+      if(document.getElementById('payment-success-overlay')||document.getElementById('donation-success-overlay')||document.getElementById('cart-success-overlay'))return;
+      var overlay=document.createElement('div');overlay.id='cart-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+      var subTxt=successSubtext||'Thank you for your order.';
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Order Confirmed!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">'+esc(subTxt)+'</p><button id="lp-cart-success-btn" style="padding:12px 32px;font-size:16px;font-weight:600;background:'+successBtnColor+';color:white;border:none;border-radius:8px;cursor:pointer;">'+esc(successBtnLabel)+'</button></div>';
+      document.body.appendChild(overlay);
+      var cBtn=document.getElementById('lp-cart-success-btn');
+      if(cBtn){cBtn.addEventListener('click',function(){if(successRedirect){window.location.href=successRedirect;}else{overlay.remove();window.history.replaceState({},'',window.location.pathname);}});}
+    }
+  });
+})();
+</script>  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="vsl-page">
+  <div id="launchBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:11px 16px;text-align:center;position:sticky;top:0;z-index:200">
+    <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px">&#127908; Live Delivery Begins In</div>
+    <div id="launchClock" style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:#fff">--</div>
+  </div>
+  <header class="hero"><div class="hero-inner">
+    <div class="brand-badge"><span class="brand-badge-dot"></span>Chatbot Authority — Paid Micro-Course</div>
+    <span class="hero-label">Now Enrolling</span>
+    <h1 class="hero-title"><span class="line-gold">WHISPER</span><br><span style="color:var(--white)">&amp; LAUNCH</span></h1>
+    <span class="hero-subtitle-line">Build your AI sales assistant in one coffee session</span>
+    <div class="video-wrapper fade-in">
+      <video controls preload="metadata" playsinline style="width:100%;display:block;background:#000;"><source src="https://studio.marcor.app/objects/quick-uploads/69/ec1aa58d67f5d3ee.mp4" type="video/mp4"></video>
+      <div class="video-bar"><span class="video-bar-text">Dijae Dadula · Chatbot Authority: Whisper &amp; Launch</span><span class="video-bar-tag">Watch First</span></div>
+    </div>
+  </div></header>
+  <div class="hook-strip"><div class="hook-strip-inner">
+    <div class="hook-item"><div class="hook-icon">☕</div>One coffee session long</div>
+    <div class="hook-item"><div class="hook-icon">📱</div>Just your phone + AI</div>
+    <div class="hook-item"><div class="hook-icon">🤖</div>One Agent, every conversation</div>
+    <div class="hook-item"><div class="hook-icon">🚀</div>4 micro-lessons</div>
+    <div class="hook-item"><div class="hook-icon">✅</div>No coding required</div>
+    <div class="hook-item"><div class="hook-icon">🎯</div>Launch-ready draft</div>
+  </div></div>
+  <section class="headline-section"><div class="container">
+    <span class="eyebrow">What if it was simpler than you think?</span>
+    <h2 class="section-headline">YOUR EXPERTISE ALREADY KNOWS<br>WHAT YOUR CHATBOT SHOULD SAY</h2>
+    <p class="section-body">Most coaches and consultants think they need a flowchart, a developer, or complicated prompt engineering. They don't. They just need to know how to talk to AI.</p>
+  </div></section>
+  <section class="no-list"><div class="container"><div class="no-list-grid">
+    <div class="no-card fade-in"><span class="no-card-strike">CODING</span><p class="no-card-desc">No tech skills. No developer. No lines of code to write.</p></div>
+    <div class="no-card fade-in"><span class="no-card-strike">FLOWCHARTS</span><p class="no-card-desc">No complicated automation maps or logic trees to build.</p></div>
+    <div class="no-card fade-in"><span class="no-card-strike">PROMPT ENG.</span><p class="no-card-desc">No complex AI prompting frameworks to memorize.</p></div>
+    <div class="no-card fade-in"><span class="no-card-strike">DEVELOPERS</span><p class="no-card-desc">No long back-and-forth waiting for someone else to build it.</p></div>
+  </div></div></section>
+  <section class="just-section"><div class="container">
+    <span class="eyebrow">All you need is already with you</span>
+    <h2 class="section-headline" style="margin-bottom:16px;">JUST YOU AND YOUR EXPERTISE</h2>
+    <p class="section-body" style="margin:0 auto;">ChatGPT or Claude does the heavy lifting. You just bring what you already know.</p>
+    <div class="just-grid">
+      <div class="just-pill"><span class="just-pill-icon">🧠</span>Your Expertise</div>
+      <div class="just-pill"><span class="just-pill-icon">💡</span>Your Idea</div>
+      <div class="just-pill"><span class="just-pill-icon">📱</span>Your Phone</div>
+      <div class="just-pill"><span class="just-pill-icon">🤖</span>ChatGPT or Claude</div>
+      <div class="just-pill"><span class="just-pill-icon">☕</span>One Coffee Session</div>
+    </div>
+  </div></section>
+  <section class="modules-section">
+    <div class="modules-header container"><span class="eyebrow">What's inside the course</span><h2 class="section-headline">4 LESSONS. ONE COFFEE SESSION.<br>ONE LAUNCH-READY CHATBOT.</h2></div>
+    <div class="modules-grid">
+      <div class="module-card fade-in"><div class="module-num">01</div><div class="module-content"><span class="module-tag">Module 1 — Foundation</span><div class="module-title">The One-Coffee AI Assistant Method</div><div class="module-lesson">Build Your AI Chatbot Without Being Technical</div><p class="module-desc">Stop thinking like a builder. Start talking to AI as your strategist.</p><span class="module-output">✦ Output: Start the right AI conversation</span></div></div>
+      <div class="module-card fade-in"><div class="module-num">02</div><div class="module-content"><span class="module-tag">Module 2 — Clarity</span><div class="module-title">Your Offer Already Knows What to Say</div><div class="module-lesson">Let AI Pull the Chatbot Out of Your Expertise</div><p class="module-desc">Your chatbot script is hidden inside your offer. AI finds it.</p><span class="module-output">✦ Output: AI Assistant Purpose Statement</span></div></div>
+      <div class="module-card fade-in"><div class="module-num">03</div><div class="module-content"><span class="module-tag">Module 3 — Conversation</span><div class="module-title">From DM to Booked Call</div><div class="module-lesson">Make AI Create the Conversation That Moves Leads Forward</div><p class="module-desc">Turn your AI Assistant Purpose into a practical lead conversation.</p><span class="module-output">✦ Output: Sales Assistant Conversation Draft</span></div></div>
+      <div class="module-card fade-in"><div class="module-num">04</div><div class="module-content"><span class="module-tag">Module 4 — Launch</span><div class="module-title">Whisper, Test, Launch</div><div class="module-lesson">Test Your AI Assistant Before Real Leads See It</div><p class="module-desc">Use AI to review, simplify, and clean up your chatbot script.</p><span class="module-output">✦ Output: Final Launch-Ready Script Draft</span></div></div>
+    </div>
+  </section>
+  <section class="promise-section"><div class="container"><div class="promise-box fade-in">
+    <span class="promise-icon">☕</span>
+    <h2 class="promise-headline">THE ONE-COFFEE PROMISE</h2>
+    <p class="promise-text">By the end of this micro-course, you will be able to:</p>
+    <ul class="promise-list">
+      <li><span class="promise-check">✦</span>Explain your offer to ChatGPT or Claude and get a clear chatbot draft</li>
+      <li><span class="promise-check">✦</span>Respond faster to lead inquiries with an AI-assisted conversation</li>
+      <li><span class="promise-check">✦</span>Guide leads through your webinar, course, or offer — automatically</li>
+      <li><span class="promise-check">✦</span>Book more serious prospects without manual follow-up</li>
+      <li><span class="promise-check">✦</span>Launch your first version without technical overwhelm</li>
+    </ul>
+    <p class="promise-text" style="font-weight:600;color:var(--gold);">Your expertise is already there. Now let AI help you build the system around it.</p>
+  </div></div></section>
+  <section class="cta-section"><div class="container"><div class="cta-box fade-in">
+    <div class="cta-price-label">Today's Price · Limited-Time</div>
+    <div style="display:flex;align-items:baseline;justify-content:center;gap:14px;margin-bottom:4px">
+      <span id="vslPriceStrike" style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--red);opacity:.7">₱999</span>
+      <span class="cta-price" id="vslPriceMain" style="margin-bottom:0">₱699</span>
+    </div>
+    <div class="cta-price-sub" id="vslPriceSub">Chatbot Authority: Whisper &amp; Launch · Save ₱300 today only</div>
+    <ul class="cta-features">
+      <li><span>✦</span>4 complete micro-lessons (6-8 min each)</li>
+      <li><span>✦</span>AI Assistant Purpose Statement framework</li>
+      <li><span>✦</span>Sales Assistant Conversation Draft system</li>
+      <li><span>✦</span>Launch-Ready Script template</li>
+      <li><span>✦</span>Lifetime access — revisit anytime</li>
+      <li><span>✦</span>Dashboard access sent to your email after validation</li>
+    </ul>
+    <button class="enroll-btn" onclick="goToCheckout()" id="vslEnrollBtn">ENROLL NOW — ₱699 ☕</button>
+    <p class="cta-privacy">🔒 Secure payment via InstaPay · GoTyme Bank</p>
+  </div></div></section>
+  <footer class="footer">
+    <span class="footer-brand">CHATBOT AUTHORITY</span>
+    <p class="footer-text">© 2025 Dijae Dadula · IRD Digital Marketing Services · Bacoor City, Cavite, Philippines</p>
+    <p class="footer-text" style="margin-top:6px;">dijae@dijaedadula.com</p>
+  </footer>
+</div>
+
+<div id="checkout-page">
+  <div class="topbar"><div class="brand">Chatbot Authority</div><div style="display:flex;align-items:center;gap:5px;font-size:13px;color:var(--muted);"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Secure checkout</div></div>
+  <div id="deadlineBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:10px 20px;text-align:center">
+    <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px">&#9203; Price Locks In</div>
+    <div id="deadlineClock" style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.06em;color:#fff">14:00</div>
+  </div>
+  <div class="co-container">
+    <button class="co-back" onclick="backToVSL()">← Back to course</button>
+    <div class="section-label">Your order</div>
+    <div class="price-org">Chatbot Authority: Whisper &amp; Launch · Lifetime Access</div>
+    <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:4px">
+      <span id="priceStrike" style="font-size:20px;font-weight:700;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--red)">₱999</span>
+      <div class="price-main" id="priceMain" style="margin-bottom:0">₱699</div>
+    </div>
+    <div class="price-desc" id="priceDesc">Today's price · Goes to ₱999 when the timer above hits zero</div>
+    <div class="order-summary">
+      <div class="order-row"><span>Whisper &amp; Launch Course</span><span id="orderCourseAmt">₱699</span></div>
+      <div class="order-row order-total"><span>Total due today</span><span class="amount" id="orderTotalAmt">₱699</span></div>
+    </div>
+
+    <div style="border:2px dashed rgba(212,175,55,.4);border-radius:14px;padding:16px;margin-bottom:16px;background:rgba(212,175,55,.04);cursor:pointer;transition:all .2s" id="bumpBox" onclick="toggleBump()">
+      <div style="display:flex;align-items:flex-start;gap:12px">
+        <div id="bumpCheck" style="width:22px;height:22px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="3" style="width:13px;height:13px;opacity:0;transition:opacity .15s" id="bumpCheckIcon"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:13.5px;font-weight:800;color:var(--gold-light);letter-spacing:.02em;margin-bottom:4px;text-transform:uppercase">&#9889; Yes — Upgrade My Access</div>
+          <div style="font-size:12.5px;color:rgba(244,242,238,.7);line-height:1.5;margin-bottom:10px">Add the complete package and lock in founder-level access:</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
+            <div style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:rgba(244,242,238,.85)"><span style="color:var(--gold);flex-shrink:0">&#9670;</span><span>All session recordings — watch and re-watch anytime</span></div>
+            <div style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:rgba(244,242,238,.85)"><span style="color:var(--gold);flex-shrink:0">&#9670;</span><span>Lifetime access to the private Discord community</span></div>
+            <div style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:rgba(244,242,238,.85)"><span style="color:var(--gold);flex-shrink:0">&#9670;</span><span>Lifetime Founder's Access to the AI Agent Orchestrator System <span style="color:var(--gold-light);font-weight:700">(worth ₱56,880/year)</span></span></div>
+          </div>
+          <div style="font-size:12px;color:var(--muted)">Adds <strong style="color:var(--gold-light);font-size:14px">₱2,299</strong> — total becomes <strong id="bumpTotalPreview" style="color:var(--gold-light);font-size:14px">₱2,998</strong> today</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="pay-header"><div class="pay-header-icon">🏦</div><div class="pay-header-title">Pay via InstaPay</div><div class="pay-header-sub">Send to GoTyme Bank · Takes less than 2 minutes</div></div>
+    <div class="qr-section"><img src="https://studio.marcor.app/objects/quick-uploads/69/428453d74664f1ac.jpg" alt="InstaPay QR Code — GoTyme Bank"></div>
+    <div class="acct-card">
+      <div class="acct-row"><span class="acct-label">Account Name</span><span class="acct-val">ISIDRO JR ROSALADA DADULA</span></div>
+      <div class="acct-row"><span class="acct-label">Account Number</span><span class="acct-val copyable" onclick="copyAcct(this)">010217008117 <span class="copy-hint">tap to copy</span></span></div>
+      <div class="acct-row"><span class="acct-label">Bank</span><span class="acct-val">GoTyme Bank</span></div>
+      <div class="acct-row"><span class="acct-label">Amount to Send</span><span class="acct-val acct-amount" id="acctAmount">₱699</span></div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Open your banking app → tap <strong>Send Money / InstaPay</strong></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Enter account <strong>010217008117</strong> (GoTyme Bank) or scan QR above</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Send the <strong id="stepAmount">exact amount: ₱699</strong> — screenshot your receipt</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Fill your details and upload receipt below</div></div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-title">📋 Your Details</div>
+      <div class="form-group"><label class="form-label-co">Full Name <span class="req">*</span></label><input class="form-input-co" id="co-name" type="text" placeholder="Juan Dela Cruz"><div class="error-msg" id="err-co-name">Please enter your full name</div></div>
+      <div class="form-group"><label class="form-label-co">Email <span class="req">*</span></label><input class="form-input-co" id="co-email" type="email" placeholder="you@email.com"><div class="error-msg" id="err-co-email">Please enter a valid email</div></div>
+      <div class="form-group"><label class="form-label-co">Mobile Number <span class="req">*</span></label><input class="form-input-co" id="co-phone" type="tel" placeholder="+63 917 123 4567"><div class="error-msg" id="err-co-phone">Please enter your mobile number</div></div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-title">📸 Upload Transaction Receipt <span class="req">*</span></div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Upload your InstaPay screenshot. Make sure recipient, amount, and reference number are visible.</p>
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="co-proof" accept="image/*" onchange="handleUpload(this)">
+        <div class="upload-icon" id="uploadIcon">📤</div>
+        <div class="upload-text" id="uploadText">Tap to upload receipt screenshot<br><span style="font-size:10px">JPG · PNG · Any image format</span></div>
+        <div class="upload-filename" id="uploadFilename"></div>
+      </div>
+      <div class="ocr-status" id="ocrStatus"></div>
+      <div class="ocr-summary" id="ocrSummary"><div style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Receipt Details Read</div><div id="ocrLines"></div></div>
+      <div class="error-msg" id="err-co-proof">Please upload your payment receipt</div>
+    </div>
+    <div class="form-group" style="margin-bottom:20px"><label style="display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px">Notes (optional)</label><input class="form-input-co" id="co-notes" type="text" placeholder="Anything we should know?"></div>
+
+    <!-- Upload progress indicator -->
+    <div class="upload-progress" id="uploadProgress">
+      <div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:4px" id="uploadProgressLabel">Uploading receipt to secure storage...</div>
+      <div class="upload-progress-bar-bg"><div class="upload-progress-bar" id="uploadProgressBar"></div></div>
+      <div class="upload-progress-text" id="uploadProgressText">This takes a few seconds — do not close this page</div>
+    </div>
+
+    <button class="submit-btn-co" id="submitBtn" onclick="submitPayment()" disabled>SUBMIT FOR VALIDATION</button>
+    <div class="submit-hint" id="submitHint">Upload your receipt above to continue</div>
+    <div class="trust-line">🔒 Receipt read by Tesseract OCR · Uploaded to secure storage · Powered by Marcor</div>
+  </div>
+</div>
+
+<div id="thankyou-page">
+  <div class="ty-hero"><div class="container">
+    <div class="ty-badge">📋 Submission Received</div>
+    <h1 class="ty-headline">SUBMITTED!<br><span class="gold">HANG TIGHT.</span></h1>
+    <p class="ty-sub" id="ty-welcome">Thank you! Your receipt has been submitted and securely stored. Our team will verify your payment — once confirmed, your course access link will be sent to your email.</p>
+    <div class="next-steps-card">
+      <div class="next-steps-icon">⏳</div>
+      <div>
+        <div class="next-steps-title">What Happens Next</div>
+        <div class="next-steps-list">
+          <div class="next-step-item"><div class="next-step-num">1</div><span>Our team reviews your receipt and verifies the payment</span></div>
+          <div class="next-step-item"><div class="next-step-num">2</div><span>Payment gets validated — usually within a few hours</span></div>
+          <div class="next-step-item"><div class="next-step-num">3</div><span>Your course dashboard access link gets sent to your email</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="spam-note">📩 Watch your inbox and spam folder. Activation emails sent from dijae@dijaedadula.com</p>
+    <a href="#" id="view-dashboard-btn" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#c4a020,var(--gold),#f0d060);border-radius:12px;padding:16px 36px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.1em;color:#0a0a0a;text-decoration:none;box-shadow:0 4px 24px rgba(212,175,55,0.25);">VIEW YOUR DASHBOARD →</a>
+
+    <!-- ── POST-PURCHASE DOWNSELL: only shown when the bump wasn't taken ── -->
+    <div id="upsellSection" style="display:none;max-width:480px;margin:40px auto 0;text-align:left">
+      <div style="border:2px dashed rgba(212,175,55,.4);border-radius:16px;padding:20px;background:rgba(212,175,55,.04)">
+        <div style="text-align:center;margin-bottom:14px">
+          <div style="font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">🎁 One More Thing — Just For You</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--white);line-height:1.1">UNLOCK EVERYTHING</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px">Recordings + Lifetime Discord + Lifetime Founder's Access to the AI Agent Orchestrator System <span style="color:var(--gold-light);font-weight:700">(worth ₱56,880/year)</span></div>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:14px">
+          <span style="font-size:16px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--red)">₱2,299</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--gold)">₱1,999</span>
+          <span style="font-size:11px;color:var(--muted)">add-on only</span>
+        </div>
+        <button id="upsellToggleBtn" onclick="toggleUpsellPay()" style="width:100%;background:linear-gradient(135deg,#c4a020,var(--gold),#f0d060);border:none;border-radius:10px;padding:15px;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.05em;color:#0a0a0a;cursor:pointer;margin-bottom:6px">🔓 YES — ADD FOR ₱1,999</button>
+        <div style="font-size:10px;color:var(--muted);text-align:center">This offer is only available right now — not shown again after you leave this page.</div>
+
+        <div id="upsellPayPanel" style="display:none;margin-top:16px">
+          <div class="pay-header" style="margin-bottom:12px"><div class="pay-header-icon">🏦</div><div class="pay-header-title">Pay via InstaPay</div><div class="pay-header-sub">Send to GoTyme Bank · Same account as before</div></div>
+          <div class="qr-section"><img src="https://studio.marcor.app/objects/quick-uploads/69/428453d74664f1ac.jpg" alt="InstaPay QR Code — GoTyme Bank"></div>
+          <div class="acct-card">
+            <div class="acct-row"><span class="acct-label">Account Name</span><span class="acct-val">ISIDRO JR ROSALADA DADULA</span></div>
+            <div class="acct-row"><span class="acct-label">Account Number</span><span class="acct-val copyable" onclick="copyAcct(this)">010217008117 <span class="copy-hint">tap to copy</span></span></div>
+            <div class="acct-row"><span class="acct-label">Bank</span><span class="acct-val">GoTyme Bank</span></div>
+            <div class="acct-row"><span class="acct-label">Amount to Send</span><span class="acct-val acct-amount">₱1,999</span></div>
+          </div>
+          <div class="upload-zone" id="upsellUploadZone" style="margin-top:12px">
+            <input type="file" id="upsell-proof" accept="image/*" onchange="handleUpsellUpload(this)">
+            <div class="upload-icon" id="upsellUploadIcon">📤</div>
+            <div class="upload-text" id="upsellUploadText">Tap to upload receipt screenshot<br><span style="font-size:10px">JPG · PNG · Any image format</span></div>
+            <div class="upload-filename" id="upsellUploadFilename"></div>
+          </div>
+          <div class="ocr-status" id="upsellOcrStatus"></div>
+          <button class="submit-btn-co" id="upsellSubmitBtn" onclick="submitUpsell()" disabled>SUBMIT FOR VALIDATION</button>
+          <div class="submit-hint" id="upsellSubmitHint">Upload your receipt above to continue</div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <footer class="footer">
+    <span class="footer-brand">CHATBOT AUTHORITY — WHISPER &amp; LAUNCH</span>
+    <p class="footer-text">© 2025 Dijae Dadula · IRD Digital Marketing Services · Bacoor City, Cavite, Philippines</p>
+    <p class="footer-text" style="margin-top:6px;">dijae@dijaedadula.com</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var CREATE_WEBHOOK = 'https://studio.marcor.app/api/webhooks/flow/4301/5b6cab48f12863e9517f10fcc3a9fc5c8a1ec571302a2434487bd3f85425092e';
+  var ATTACH_WEBHOOK = 'https://studio.marcor.app/api/webhooks/flow/4302/9e8921046f76eea865307857f9c6bc33f758d1fca89e6ab97c1a8cc7563a5f83';
+  var UPSELL_WEBHOOK = 'https://studio.marcor.app/api/webhooks/flow/4281/02a5ebe85bf5b3df636d642273f657e158f84dd0e48eb638de772c1f6225087c';
+  var ACCT_NUM = '010217008117';
+  var ACCT_NAME = 'ISIDRO JR ROSALADA DADULA';
+
+  var ocr = {ref:'For review',dt:'For review',paid:'For review',match:false,hasAnyMoney:false,wrongAccount:false,wrongAmount:false,text:'',filename:''};
+  var slipUploaded = false;
+  var cachedFile = null;
+
+  var LAUNCH_TARGET = new Date('2026-07-17T21:00:00+08:00').getTime();
+  function padL(n){return n<10?'0'+n:''+n;}
+  function tickLaunch(){
+    var remaining = LAUNCH_TARGET - Date.now();
+    var bar = document.getElementById('launchBar');
+    if(remaining<=0){ if(bar) bar.style.display='none'; clearInterval(launchTimer); return; }
+    var totalSec=Math.floor(remaining/1000);
+    var d=Math.floor(totalSec/86400), h=Math.floor((totalSec%86400)/3600), m=Math.floor((totalSec%3600)/60), s=totalSec%60;
+    var clk=document.getElementById('launchClock');
+    if(clk) clk.textContent = d+'d '+padL(h)+'h '+padL(m)+'m '+padL(s)+'s';
+  }
+  tickLaunch();
+  var launchTimer = setInterval(tickLaunch, 1000);
+
+  window.goToCheckout = function(){document.getElementById('vsl-page').style.display='none';document.getElementById('checkout-page').style.display='block';window.scrollTo({top:0,behavior:'smooth'});initPricing();};
+
+  var DEADLINE_MS = 14 * 60 * 1000;
+  var bumpActive = false;
+  var priceTimer = null;
+  var currentBasePrice = 699;
+
+  function getCookie(name){var m=document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)');return m?m.pop():null;}
+  function setCookie(name,value,days){var d=new Date();d.setTime(d.getTime()+(days*24*60*60*1000));document.cookie=name+'='+value+';expires='+d.toUTCString()+';path=/;SameSite=Lax';}
+
+  function getDeadline(){
+    try{
+      if(new URLSearchParams(window.location.search).get('reset')==='1'){
+        localStorage.removeItem('wl_price_deadline');
+        setCookie('wl_pd','',-1);
+      }
+    }catch(e){}
+    var v=null;
+    try{ v=localStorage.getItem('wl_price_deadline'); }catch(e){}
+    if(!v) v=getCookie('wl_pd');
+    if(!v){ v=String(Date.now()+DEADLINE_MS); }
+    try{ localStorage.setItem('wl_price_deadline', v); }catch(e){}
+    setCookie('wl_pd', v, 365);
+    return parseInt(v,10);
+  }
+  var priceDeadline = getDeadline();
+
+  function pad(n){return n<10?'0'+n:''+n;}
+  function fmtPeso(n){return '₱'+n.toLocaleString('en-PH');}
+
+  function updatePriceDisplay(){
+    var total = currentBasePrice + (bumpActive?2299:0);
+    var el;
+    el=document.getElementById('priceMain'); if(el) el.textContent=fmtPeso(currentBasePrice);
+    el=document.getElementById('orderCourseAmt'); if(el) el.textContent=fmtPeso(currentBasePrice);
+    el=document.getElementById('orderTotalAmt'); if(el) el.textContent=fmtPeso(total);
+    el=document.getElementById('acctAmount'); if(el) el.textContent=fmtPeso(total);
+    el=document.getElementById('stepAmount'); if(el) el.textContent='exact amount: '+fmtPeso(total);
+    el=document.getElementById('bumpTotalPreview'); if(el) el.textContent=fmtPeso(currentBasePrice+2299);
+    el=document.getElementById('vslPriceMain'); if(el) el.textContent=fmtPeso(currentBasePrice);
+    el=document.getElementById('vslEnrollBtn'); if(el) el.textContent='ENROLL NOW — '+fmtPeso(currentBasePrice)+' ☕';
+  }
+
+  function tickPrice(){
+    var remaining = priceDeadline - Date.now();
+    var bar = document.getElementById('deadlineBar');
+    if(remaining <= 0){
+      currentBasePrice = 999;
+      bumpActive = false;
+      if(bar) bar.style.display='none';
+      var strikeEl=document.getElementById('priceStrike'); if(strikeEl) strikeEl.style.display='none';
+      var vslStrikeEl=document.getElementById('vslPriceStrike'); if(vslStrikeEl) vslStrikeEl.style.display='none';
+      var pd=document.getElementById('priceDesc'); if(pd) pd.textContent='Regular price · One-time payment';
+      var vpd=document.getElementById('vslPriceSub'); if(vpd) vpd.textContent='Chatbot Authority: Whisper & Launch · Regular price';
+      var bb=document.getElementById('bumpBox'); if(bb) bb.style.display='none';
+      updatePriceDisplay();
+      clearInterval(priceTimer);
+      return;
+    }
+    currentBasePrice = 699;
+    var totalSec=Math.floor(remaining/1000), m=Math.floor(totalSec/60), s=totalSec%60;
+    var clk=document.getElementById('deadlineClock'); if(clk) clk.textContent=pad(m)+':'+pad(s);
+    updatePriceDisplay();
+  }
+
+  function initPricing(){
+    tickPrice();
+    if(!priceTimer) priceTimer = setInterval(tickPrice, 1000);
+  }
+
+  initPricing();
+
+  window.toggleBump = function(){
+    bumpActive = !bumpActive;
+    var box=document.getElementById('bumpBox'), chk=document.getElementById('bumpCheck'), icon=document.getElementById('bumpCheckIcon');
+    if(bumpActive){
+      box.style.borderStyle='solid'; box.style.borderColor='var(--gold)'; box.style.background='rgba(212,175,55,.08)';
+      chk.style.background='var(--gold)'; chk.style.borderColor='var(--gold)'; icon.style.opacity='1';
+    } else {
+      box.style.borderStyle='dashed'; box.style.borderColor='rgba(212,175,55,.4)'; box.style.background='rgba(212,175,55,.04)';
+      chk.style.background=''; chk.style.borderColor='var(--border)'; icon.style.opacity='0';
+    }
+    updatePriceDisplay();
+  };
+
+  window.backToVSL = function(){document.getElementById('checkout-page').style.display='none';document.getElementById('vsl-page').style.display='block';window.scrollTo({top:0,behavior:'smooth'});};
+
+  var lastSubmission = {name:'',email:'',phone:''};
+
+  function showThankYou(name, email){
+    document.getElementById('checkout-page').style.display='none';
+    document.getElementById('thankyou-page').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+    var el=document.getElementById('ty-welcome');
+    if(el&&name) el.innerHTML='Thank you, <strong style="color:var(--gold)">'+name+'</strong>! Your receipt has been securely uploaded and submitted. Our team will verify your payment — once confirmed, your course access link will be sent to your email.';
+    var dashBtn=document.getElementById('view-dashboard-btn');
+    if(dashBtn) dashBtn.href='https://studio.marcor.app/p/cX48X5a'+(email?'?email='+encodeURIComponent(email)+'&status=pending':'');
+    if(!bumpActive){
+      var up=document.getElementById('upsellSection');
+      if(up) up.style.display='block';
+    }
+    setTimeout(initFadeIns,100);
+  }
+
+  function setProgress(pct, label, sub){
+    var prog=document.getElementById('uploadProgress');
+    var bar=document.getElementById('uploadProgressBar');
+    var lbl=document.getElementById('uploadProgressLabel');
+    var txt=document.getElementById('uploadProgressText');
+    prog.style.display='block';
+    bar.style.width=pct+'%';
+    if(label) lbl.textContent=label;
+    if(sub) txt.textContent=sub;
+  }
+  function hideProgress(){ document.getElementById('uploadProgress').style.display='none'; }
+
+  window.copyAcct=function(el){var t=ACCT_NUM,o=el.innerHTML;function f(){el.innerHTML=t+' <span class="copy-hint" style="color:var(--green)">✓ copied!</span>';setTimeout(function(){el.innerHTML=o;},2000);}try{navigator.clipboard.writeText(t).then(f).catch(f);}catch(e){var x=document.createElement('textarea');x.value=t;x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();document.execCommand('copy');document.body.removeChild(x);f();}};
+
+  function showEl(id){var e=document.getElementById(id);if(e)e.classList.add('show');}
+  function hideEl(id){var e=document.getElementById(id);if(e)e.classList.remove('show');}
+  function valEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+  function digs(s){return(s||'').replace(/\D/g,'');}
+  function setSubmit(ok,hint){var b=document.getElementById('submitBtn'),h=document.getElementById('submitHint');if(b)b.disabled=!ok;if(h)h.textContent=hint||'';}
+  function setStatus(cls,html){var el=document.getElementById('ocrStatus');el.className='ocr-status '+cls;el.innerHTML=html;}
+  function setZone(cls,icon,text){document.getElementById('uploadZone').className='upload-zone '+cls;document.getElementById('uploadIcon').textContent=icon;document.getElementById('uploadText').innerHTML=text;}
+  function parseRef(t){var m=t.match(/(?:ref(?:erence)?\s*(?:no\.?|number)?|trace\s*(?:no\.?)?|transaction\s*(?:id|no\.?|number)?)[^\dA-Z]{0,30}((?:[A-Z0-9]{2,}[\s-]*){2,})/i);if(m){var d=digs(m[1]);if(d.length>=8)return d;}m=t.match(/\b(?:\d{4}[\s-]){2,4}\d{2,8}\b/);if(m)return digs(m[0]);m=t.match(/\b\d{10,20}\b/);return m?m[0]:'For review';}
+  function parseDt(t){var d=(t.match(/\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s*\d{4}\b/i)||t.match(/\b\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}\b/)||[''])[0];var tm=(t.match(/\b\d{1,2}:\d{2}(?::\d{2})?\s*(?:AM|PM|am|pm)?\b/)||[''])[0];return [d,tm].filter(Boolean).join(' ')||'For review';}
+  function parseAllMoney(t){var a=[],m,r=/(?:&#8369;|PHP|P)\s*([0-9][0-9,]*(?:\.\d{1,2})?)/gi;while((m=r.exec(t))!==null)a.push(parseFloat(m[1].replace(/,/g,'')));var bare=t.match(/\b\d{3,5}(?:\.\d{1,2})?\b/g)||[];bare.forEach(function(n){var v=parseFloat(n);if(v>=100&&v<=50000)a.push(v);});return a;}
+  function parseMoney(t){var a=[],m,r=/(?:&#8369;|PHP|P)\s*([0-9][0-9,]*(?:\.\d{1,2})?)/gi;while((m=r.exec(t))!==null)a.push(m[1].replace(/,/g,''));if(a.length)return'\u20b1'+a[0];var n=t.match(/\b9[,.]?9[,.]?7(?:\.\d{1,2})?\b/);return n?'\u20b1997':'For review';}
+  function parseMatch(t){var s=t.toLowerCase().replace(/\s/g,'');return s.indexOf('010217008117')>=0||s.indexOf('isidro')>=0||s.indexOf('dadula')>=0||s.indexOf('gotyme')>=0||s.indexOf('go-tyme')>=0;}
+  function parseWrongAccount(t){if(parseMatch(t))return false;var h1=/(?:to|recipient|beneficiary|send\s*to)[^\n]{0,60}\d{10,13}/i.test(t);var h2=/(?:to|recipient|beneficiary)[^\n]{0,60}[A-Z][a-z]+\s+[A-Z][a-z]+/i.test(t);return h1||h2;}
+  function isPaymentDoc(t){return /(?:\u20b1|php|gcash|instapay|send|transfer|paid|payment|transaction|receipt|amount|peso)/i.test(t.toLowerCase())&&/\b\d{6,}\b/.test(t);}
+  function drawSummary(errorsOnly){
+    var sum=document.getElementById('ocrSummary'),lines=document.getElementById('ocrLines');
+    if(errorsOnly){sum.style.display='none';return;}
+    sum.style.display='block';
+    var rows=[['Recipient',ocr.match?ACCT_NAME:(ocr.wrongAccount?'Different account':'For staff review'),ocr.match?'matched':(ocr.wrongAccount?'bad':'review')],['Amount Paid',ocr.paid,(ocr.paid!=='For review'&&!ocr.wrongAmount)?'matched':(ocr.wrongAmount?'bad':'review')],['Reference No.',ocr.ref,ocr.ref!=='For review'?'matched':'review'],['Date / Time',ocr.dt,ocr.dt!=='For review'?'matched':'review'],['File',ocr.filename||'Uploaded','matched']];
+    lines.innerHTML=rows.map(function(r){return'<div class="ocr-summary-row"><span class="ocr-summary-label">'+r[0]+'</span><span class="ocr-summary-val '+r[2]+'">'+r[1]+'</span></div>';}).join('');
+  }
+
+  window.handleUpload=function(input){
+    var file=input.files&&input.files[0];
+    if(!file)return;
+    cachedFile=file;
+    ocr.filename=file.name; slipUploaded=false;
+    setZone('reading','🔍','Reading your receipt...');
+    document.getElementById('uploadFilename').textContent='📄 '+file.name;
+    setStatus('reading','⏳ Reading transaction slip... please wait.');
+    setSubmit(false,'Reading your receipt...'); hideEl('err-co-proof');
+    document.getElementById('ocrSummary').style.display='none';
+    if(!window.Tesseract){slipUploaded=true;setZone('warn','📄','<span style="color:#f0d060;font-weight:700">Uploaded — staff will verify</span>');setStatus('warn','Receipt saved. Team will verify manually.');setSubmit(true,'Submit for validation');return;}
+    var ocrTimedOut=false;
+    var ocrTimeout=setTimeout(function(){
+      ocrTimedOut=true;
+      slipUploaded=true;
+      setZone('warn','📄','<span style="color:#f0d060;font-weight:700">Uploaded — staff will verify</span>');
+      setStatus('warn','Taking longer than usual to read — you can submit now, our team will verify manually.');
+      setSubmit(true,'Submit for validation');
+    },20000);
+    Tesseract.recognize(file,'eng').then(function(result){
+      if(ocrTimedOut)return;
+      clearTimeout(ocrTimeout);
+      var t=result&&result.data&&result.data.text?result.data.text:'';
+      ocr.text=t;ocr.ref=parseRef(t);ocr.dt=parseDt(t);ocr.paid=parseMoney(t);ocr.match=parseMatch(t);
+      if(!isPaymentDoc(t)){setZone('warn','📄','<span style="color:#f0d060;font-weight:700">Could not auto-verify — staff will check</span>');setStatus('warn','<strong>⚠️ We couldn\'t automatically confirm this is a receipt.</strong> You can still submit — our team will manually verify it.');drawSummary(false);slipUploaded=true;setSubmit(true,'Submit for staff review');return;}
+      var allAmounts=parseAllMoney(t);ocr.hasAnyMoney=allAmounts.length>0;
+      var expectedTotal=currentBasePrice+(bumpActive?2299:0);
+      var hasCorrectAmount=false;for(var i=0;i<allAmounts.length;i++){if(allAmounts[i]>=expectedTotal-10&&allAmounts[i]<=expectedTotal+10){hasCorrectAmount=true;break;}}
+      ocr.wrongAmount=ocr.hasAnyMoney&&!hasCorrectAmount;ocr.wrongAccount=parseWrongAccount(t);
+      var hardErrors=[];
+      if(ocr.wrongAmount)hardErrors.push('Wrong amount — receipt shows ₱'+allAmounts[0]+' but expected \u20b1'+expectedTotal+'.');
+      if(ocr.wrongAccount&&!ocr.match)hardErrors.push('Wrong recipient — please send to GoTyme 010217008117 (ISIDRO DADULA).');
+      if(hardErrors.length>0){setZone('warn','📄','<span style="color:#f0d060;font-weight:700">Needs staff review</span>');setStatus('warn','<strong>⚠️ Please double check:</strong><div class="ocr-error-list">'+hardErrors.map(function(e){return'<div class="ocr-error-item">'+e+'</div>';}).join('')+'</div><div style="margin-top:8px">If this looks right to you, go ahead and submit — our team will manually verify it.</div>');drawSummary(false);slipUploaded=true;setSubmit(true,'Submit for staff review');return;}
+      drawSummary(false);slipUploaded=true;
+      if(ocr.match&&hasCorrectAmount){setZone('ok','✅','<span style="color:var(--green);font-weight:700">Receipt looks good!</span>');setStatus('ok','✅ GoTyme account matched and amount confirmed. Submit below.');setSubmit(true,'Submit for team validation');}
+      else if(ocr.match){setZone('warn','📄','<span style="color:#f0d060;font-weight:700">Account matched — amount unreadable</span>');setStatus('warn','Account matched. Team will verify amount.');setSubmit(true,'Submit for staff verification');}
+      else{setZone('warn','📄','<span style="color:#f0d060;font-weight:700">Uploaded — needs review</span>');setStatus('warn','Receipt uploaded. Team will review details.');setSubmit(true,'Submit for staff review');}
+    }).catch(function(){
+      if(ocrTimedOut)return;
+      clearTimeout(ocrTimeout);
+      slipUploaded=true;setZone('warn','📄','<span style="color:#f0d060;font-weight:700">Uploaded — staff will verify</span>');setStatus('warn','Could not read automatically. Team will verify.');drawSummary(false);setSubmit(true,'Submit for validation');
+    });
+  };
+
+  function compressImage(file, maxWidth, quality){
+    return new Promise(function(resolve, reject){
+      var img=new Image();
+      var url=URL.createObjectURL(file);
+      img.onload=function(){
+        URL.revokeObjectURL(url);
+        var w=img.width, h=img.height;
+        if(w>maxWidth){h=Math.round(h*maxWidth/w);w=maxWidth;}
+        var canvas=document.createElement('canvas');
+        canvas.width=w; canvas.height=h;
+        canvas.getContext('2d').drawImage(img,0,0,w,h);
+        var dataUrl=canvas.toDataURL('image/jpeg',quality);
+        resolve(dataUrl.replace(/^data:[^;]+;base64,/,''));
+      };
+      img.onerror=reject;
+      img.src=url;
+    });
+  }
+
+  function normalizePhone(p){
+    var d=(p||'').replace(/[^\d+]/g,'');
+    if(d.indexOf('+')===0)return d;
+    if(d.indexOf('63')===0)return '+'+d;
+    if(d.indexOf('0')===0)return '+63'+d.substring(1);
+    if(d.length===10)return '+63'+d;
+    return d?('+'+d):'';
+  }
+
+  window.addEventListener('error', function(e){
+    try{ alert('DEBUG - Page error: ' + (e && e.message ? e.message : 'unknown error')); }catch(_e){}
+  });
+  window.addEventListener('unhandledrejection', function(e){
+    try{ alert('DEBUG - Promise error: ' + (e && e.reason ? (e.reason.message||e.reason) : 'unknown error')); }catch(_e){}
+  });
+
+  window.submitPayment=async function(){
+   try{
+    var name=(document.getElementById('co-name').value||'').trim();
+    var email=(document.getElementById('co-email').value||'').trim();
+    var phone=(document.getElementById('co-phone').value||'').trim();
+    lastSubmission = {name:name, email:email, phone:phone};
+    var proof=cachedFile||document.getElementById('co-proof').files[0];
+    var ok=true;
+    if(!name){showEl('err-co-name');ok=false;}else hideEl('err-co-name');
+    if(!valEmail(email)){showEl('err-co-email');ok=false;}else hideEl('err-co-email');
+    if(!phone){showEl('err-co-phone');ok=false;}else hideEl('err-co-phone');
+    if(!proof||!slipUploaded){showEl('err-co-proof');ok=false;}else hideEl('err-co-proof');
+    if(!ok)return;
+
+    var btn=document.getElementById('submitBtn');
+    btn.disabled=true;
+    var notes=(document.getElementById('co-notes').value||'').trim();
+
+    var finalTotal = currentBasePrice + (bumpActive?2299:0);
+    var orderType = (currentBasePrice===699?'Early Price':'Regular Price') + (bumpActive?' + Bump':'');
+    var phoneE164 = normalizePhone(phone);
+
+    setProgress(30,'Creating your enrollment...','Almost there!');
+    var createPayload={
+      contactName:name,
+      contactEmail:email,
+      contactPhone:phoneE164,
+      channel:'webchat',
+      data:{
+        payment_method:'InstaPay',
+        course:'Chatbot Authority: Whisper & Launch',
+        order_type:orderType,
+        total_amount:'\u20b1'+finalTotal.toLocaleString('en-PH'),
+        total_amount_num:String(finalTotal),
+        proof_filename:ocr.filename
+      }
+    };
+    var createOk = false;
+    try{
+      var res1 = await Promise.race([
+        fetch(CREATE_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(createPayload),keepalive:true}),
+        new Promise(function(_,rej){setTimeout(function(){rej(new Error('create-timeout'));},8000);})
+      ]);
+      createOk = true;
+    }catch(e1){
+      createOk = false;
+    }
+
+    setProgress(70,'Attaching your receipt...','Almost done!');
+    var base64='';
+    try{
+      base64=await compressImage(proof,640,0.65);
+    }catch(e){
+      try{
+        base64=await new Promise(function(res){var r=new FileReader();r.onload=function(e){res((e.target.result||'').replace(/^data:[^;]+;base64,/,''));};r.readAsDataURL(proof);});
+      }catch(e2){base64='';}
+    }
+    var receiptUrl = base64 ? ('data:image/jpeg;base64,'+base64) : '';
+    try{ if(base64) localStorage.setItem('wl_receipt_'+email.toLowerCase(), receiptUrl); }catch(e2){}
+
+    var attachPayload={
+      contactName:name,
+      contactEmail:email,
+      contactPhone:phoneE164,
+      channel:'webchat',
+      data:{
+        receipt_image:receiptUrl,
+        ocr_recipient_match:ocr.match?'GoTyme account matched':'For staff review',
+        ocr_amount:ocr.paid,
+        ocr_reference:ocr.ref
+      }
+    };
+    try{
+      fetch(ATTACH_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(attachPayload),keepalive:true}).catch(function(){});
+    }catch(e){}
+
+    setProgress(100,'Done! ✓','');
+    if(!createOk){
+      alert('DEBUG - The enrollment request could not be confirmed (network error or timeout). Please try again, or contact dijae@dijaedadula.com directly with a screenshot of this message.');
+    }
+    setTimeout(function(){hideProgress();showThankYou(name,email);},400);
+   }catch(outerErr){
+    alert('DEBUG - submitPayment crashed: ' + (outerErr && outerErr.message ? outerErr.message : outerErr));
+    var btn2=document.getElementById('submitBtn');
+    if(btn2) btn2.disabled=false;
+   }
+  };
+
+  var upsellFile=null, upsellReceiptUrl='', upsellReady=false;
+  window.toggleUpsellPay=function(){
+    var panel=document.getElementById('upsellPayPanel');
+    var btn=document.getElementById('upsellToggleBtn');
+    if(panel.style.display==='none'||panel.style.display===''){
+      panel.style.display='block'; btn.textContent='✕ Close';
+      panel.scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      panel.style.display='none'; btn.textContent='🔓 YES — ADD FOR ₱1,999';
+    }
+  };
+
+  window.handleUpsellUpload=function(input){
+    var file=input.files&&input.files[0];
+    if(!file)return;
+    upsellFile=file; upsellReady=false;
+    document.getElementById('upsellUploadFilename').textContent='📄 '+file.name;
+    document.getElementById('upsellUploadIcon').textContent='⏳';
+    document.getElementById('upsellUploadText').innerHTML='Reading your receipt...';
+    var st=document.getElementById('upsellOcrStatus');
+    st.className='ocr-status reading'; st.innerHTML='⏳ Reading transaction slip...';
+    document.getElementById('upsellSubmitBtn').disabled=true;
+    document.getElementById('upsellSubmitHint').textContent='Reading your receipt...';
+
+    compressImage(file,640,0.65).then(function(base64){
+      upsellReceiptUrl = 'data:image/jpeg;base64,'+base64;
+      upsellReady=true;
+      document.getElementById('upsellUploadIcon').textContent='✅';
+      document.getElementById('upsellUploadText').innerHTML='<span style="color:var(--green);font-weight:700">Receipt uploaded</span>';
+      st.className='ocr-status ok'; st.innerHTML='✅ Receipt saved. Team will verify and unlock your full access.';
+      document.getElementById('upsellSubmitBtn').disabled=false;
+      document.getElementById('upsellSubmitHint').textContent='Submit to unlock everything';
+    }).catch(function(){
+      upsellReady=true;
+      document.getElementById('upsellUploadIcon').textContent='📄';
+      document.getElementById('upsellUploadText').innerHTML='<span style="color:#f0d060;font-weight:700">Uploaded — staff will verify</span>';
+      st.className='ocr-status warn'; st.innerHTML='Receipt saved. Team will verify manually.';
+      document.getElementById('upsellSubmitBtn').disabled=false;
+      document.getElementById('upsellSubmitHint').textContent='Submit to unlock everything';
+    });
+  };
+
+  window.submitUpsell=async function(){
+    if(!upsellReady||!upsellReceiptUrl)return;
+    var btn=document.getElementById('upsellSubmitBtn');
+    btn.disabled=true; btn.textContent='SUBMITTING...';
+
+    var payload={
+      contactName:lastSubmission.name,
+      contactEmail:lastSubmission.email,
+      contactPhone:normalizePhone(lastSubmission.phone),
+      channel:'webchat',
+      data:{
+        payment_method:'InstaPay',
+        course:'Chatbot Authority: Whisper & Launch',
+        order_type:'Post-Purchase Upsell (₱1,999 add-on)',
+        total_amount:'\u20b11,999',
+        notes:'Post-purchase downsell upgrade',
+        proof_filename:upsellFile?upsellFile.name:'',
+        receipt_image:upsellReceiptUrl,
+        ocr_recipient_match:'For staff review',
+        ocr_amount:'For review',
+        ocr_reference:'For review'
+      }
+    };
+
+    try{
+      fetch(UPSELL_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true}).catch(function(){});
+    }catch(e){}
+
+    setTimeout(function(){
+      document.getElementById('upsellSection').innerHTML='<div style="text-align:center;padding:20px;border:2px solid var(--green);border-radius:14px;background:rgba(34,197,94,.08)"><div style="font-size:32px;margin-bottom:8px">✅</div><div style="font-weight:700;color:var(--green);margin-bottom:4px">Upgrade Submitted!</div><div style="font-size:13px;color:var(--muted)">Our team will verify and unlock your full access — check your dashboard soon.</div></div>';
+    },500);
+  };
+
+  function initFadeIns(){var els=document.querySelectorAll('.fade-in');var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});els.forEach(function(el){obs.observe(el);});}
+  document.addEventListener('DOMContentLoaded',initFadeIns);
+})();
+</script>
+</body>
+</html>
