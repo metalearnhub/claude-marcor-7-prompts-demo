@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://go.marcor.app/training/</loc>
+    <lastmod>2026-07-13T04:22:25.547Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://go.marcor.app/claude/</loc>
-    <lastmod>2026-07-13T03:20:37.933Z</lastmod>
+    <lastmod>2026-07-13T04:03:40.246Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
