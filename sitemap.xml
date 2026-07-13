@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://go.marcor.app/claude/blog/breathing-room-auditor/</loc>
+    <lastmod>2026-07-13T15:14:24.507Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://go.marcor.app/claude/</loc>
-    <lastmod>2026-07-13T15:03:44.228Z</lastmod>
+    <lastmod>2026-07-13T15:10:18.666Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
