@@ -100,6 +100,11 @@
   #agentWrap{display:none;}
   #agentWrap iframe{width:100%;height:600px;border:none;border-radius:14px;}
   .unlock-note{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .formfield{margin-bottom:14px;text-align:left;}
+  .formfield label{display:block;font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:6px;}
+  .formfield input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:15px;font-family:inherit;background:#fff;}
+  .formfield input:focus{outline:2px solid var(--orange);border-color:var(--orange);}
+  #nativeLeadForm{padding:0 4px;}
 
   footer{padding:44px 0;border-top:1px solid var(--line);}
   .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--ink-soft);}
