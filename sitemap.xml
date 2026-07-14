@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://go.marcor.app/training/</loc>
+    <lastmod>2026-07-14T09:55:44.986Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://go.marcor.app/learn-ai/</loc>
     <lastmod>2026-07-14T09:55:39.363Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -33,11 +38,6 @@
   <url>
     <loc>https://go.marcor.app/</loc>
     <lastmod>2026-07-14T09:55:08.620Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/training/</loc>
-    <lastmod>2026-07-13T08:52:02.275Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>
