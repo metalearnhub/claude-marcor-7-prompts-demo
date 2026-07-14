@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://go.marcor.app/</loc>
-    <lastmod>2026-07-14T10:02:51.140Z</lastmod>
+    <lastmod>2026-07-14T10:05:15.944Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://go.marcor.app/claude/blog/trust-signal-sweep/</loc>
+    <lastmod>2026-07-14T10:04:55.898Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://go.marcor.app/claude/blog/design-averaging/</loc>
+    <lastmod>2026-07-14T10:04:47.820Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://go.marcor.app/claude/blog/anti-sameness-type/</loc>
+    <lastmod>2026-07-14T10:04:37.659Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://go.marcor.app/claude/blog/breathing-room-auditor/</loc>
+    <lastmod>2026-07-14T10:04:24.548Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://go.marcor.app/learn-ai/</loc>
-    <lastmod>2026-07-14T09:59:04.794Z</lastmod>
+    <lastmod>2026-07-14T10:04:15.070Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://go.marcor.app/claude/</loc>
+    <lastmod>2026-07-14T10:04:06.154Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://go.marcor.app/training/</loc>
     <lastmod>2026-07-14T09:55:44.986Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/blog/trust-signal-sweep/</loc>
-    <lastmod>2026-07-14T09:55:33.041Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/blog/design-averaging/</loc>
-    <lastmod>2026-07-14T09:55:28.550Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/blog/breathing-room-auditor/</loc>
-    <lastmod>2026-07-14T09:55:23.937Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/blog/anti-sameness-type/</loc>
-    <lastmod>2026-07-14T09:55:19.529Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/</loc>
-    <lastmod>2026-07-14T09:55:14.821Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>
