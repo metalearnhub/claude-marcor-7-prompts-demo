@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://go.marcor.app/claude/blog/anti-sameness-type/</loc>
+    <lastmod>2026-07-14T10:19:22.900Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://go.marcor.app/learn-ai/</loc>
     <lastmod>2026-07-14T10:19:18.928Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -13,11 +18,6 @@
   <url>
     <loc>https://go.marcor.app/claude/blog/design-averaging/</loc>
     <lastmod>2026-07-14T10:15:48.853Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/blog/anti-sameness-type/</loc>
-    <lastmod>2026-07-14T10:15:41.033Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
