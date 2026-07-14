@@ -43,10 +43,10 @@
 <meta name="twitter:title" content="Chatbot Authority — Learn AI From Zero, Free, In 30 Days" />
 <meta name="twitter:description" content="The exact 30-day roadmap to learn AI from zero for free — Claude, Canva, Leonardo, Google Flow, Gamma and more. Chat with our free AI Learning Guide right on this page and learn it all without leaving." />
 <meta name="twitter:image" content="https://studio.marcor.app/objects/generated-images/69/1783912762695-43eba3950a6e541b.png" />
-<link rel="icon" href="favicon.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
+<link rel="icon" href="https://studio.marcor.app/api/landing-pages/images/landing-page-images%2F0%2F1783916829274_blob.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://studio.marcor.app/api/landing-pages/images/landing-page-images%2F0%2F1783916829274_blob.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://studio.marcor.app/api/landing-pages/images/landing-page-images%2F0%2F1783916829274_blob.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://studio.marcor.app/api/landing-pages/images/landing-page-images%2F0%2F1783916829274_blob.png" />
 <!-- End SEO Meta Tags -->
 <script data-lp-token-hydrate>
 (function(){try{
@@ -329,8 +329,7 @@
     }
   });
 })();
-</script>
-<script src="https://studio.marcor.app/widget.js" data-widget="41289223" async></script>  <link rel="stylesheet" href="styles.css">
+</script>  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -512,19 +511,33 @@
       </div>
 
       <div class="agent-panel">
-        <div id="leadFormWrap">
-          <h3>🔓 Unlock the Free AI Learning Guide</h3>
-          <p class="formsub">Enter your details once — then chat and learn the full roadmap free, right on this page.</p>
-          <iframe id="leadFormFrame" src="https://studio.marcor.app/forms/shxhtruk"></iframe>
-          <div class="unlock-note">👇 After submitting, click below to start chatting</div>
-          <div style="text-align:center;margin-top:16px;">
-            <button onclick="unlockAgent()" class="btn" style="width:100%;justify-content:center;">I've Submitted — Start Chatting →</button>
-          </div>
-        </div>
-        <div id="agentWrap">
-          <iframe src="https://studio.marcor.app/agents/83402971/embed"></iframe>
-        </div>
+  <div id="leadFormWrap">
+    <h3>🔓 Unlock the Free AI Learning Guide</h3>
+    <p class="formsub">Enter your details once — then start chatting and learn the full roadmap free, right on this page.</p>
+    <form id="nativeLeadForm" onsubmit="return submitLeadForm(event)">
+      <input type="hidden" name="contactName" id="fld_name_hidden">
+      <input type="hidden" name="contactEmail" id="fld_email_hidden">
+      <input type="hidden" name="contactPhone" id="fld_phone_hidden">
+      <div class="formfield">
+        <label>Full Name</label>
+        <input type="text" id="fld_name" required placeholder="Your full name">
       </div>
+      <div class="formfield">
+        <label>Email</label>
+        <input type="email" id="fld_email" required placeholder="you@email.com">
+      </div>
+      <div class="formfield">
+        <label>Phone</label>
+        <input type="tel" id="fld_phone" required placeholder="+1 555 123 4567">
+      </div>
+      <button type="submit" class="btn" style="width:100%;justify-content:center;margin-top:8px;">Start Learning Free →</button>
+    </form>
+  </div>
+  <div id="agentWrap">
+    <iframe src="https://studio.marcor.app/agents/83402971/embed"></iframe>
+  </div>
+</div>
+<iframe name="hiddenSubmitFrame" style="display:none;"></iframe>
     </div>
   </div>
 </section>
