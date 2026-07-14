@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://go.marcor.app/</loc>
+    <lastmod>2026-07-14T08:31:03.998Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://go.marcor.app/claude/</loc>
+    <lastmod>2026-07-14T01:30:01.540Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://go.marcor.app/claude/blog/trust-signal-sweep/</loc>
-    <lastmod>2026-07-13T15:14:59.667Z</lastmod>
+    <lastmod>2026-07-13T15:29:42.330Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://go.marcor.app/claude/blog/breathing-room-auditor/</loc>
+    <lastmod>2026-07-13T15:29:00.736Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -16,23 +31,8 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://go.marcor.app/claude/blog/breathing-room-auditor/</loc>
-    <lastmod>2026-07-13T15:14:24.507Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/</loc>
-    <lastmod>2026-07-13T15:10:18.666Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
     <loc>https://go.marcor.app/training/</loc>
     <lastmod>2026-07-13T08:52:02.275Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/</loc>
-    <lastmod>2026-07-13T03:18:28.361Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>
