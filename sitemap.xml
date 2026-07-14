@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://go.marcor.app/claude/blog/breathing-room-auditor/</loc>
+    <lastmod>2026-07-14T08:46:12.121Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://go.marcor.app/learn-ai/</loc>
     <lastmod>2026-07-14T08:46:05.236Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,11 +28,6 @@
   <url>
     <loc>https://go.marcor.app/claude/blog/anti-sameness-type/</loc>
     <lastmod>2026-07-14T08:44:27.593Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/blog/breathing-room-auditor/</loc>
-    <lastmod>2026-07-14T08:44:11.096Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
