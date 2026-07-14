@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://go.marcor.app/claude/blog/design-averaging/</loc>
+    <lastmod>2026-07-14T08:46:26.847Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://go.marcor.app/claude/blog/anti-sameness-type/</loc>
     <lastmod>2026-07-14T08:46:19.679Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,11 +28,6 @@
   <url>
     <loc>https://go.marcor.app/claude/blog/trust-signal-sweep/</loc>
     <lastmod>2026-07-14T08:45:05.378Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://go.marcor.app/claude/blog/design-averaging/</loc>
-    <lastmod>2026-07-14T08:44:45.888Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
