@@ -1,0 +1,3 @@
+var LAUNCH_TARGET = new Date('2026-07-18T10:00:00+08:00');
+
+var LAUNCH_TARGET = new Date('2026-07-18T10:00:00+08:00');
