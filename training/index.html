@@ -296,12 +296,12 @@
     }
   });
 })();
-</script>
-<script src="https://studio.marcor.app/widget.js" data-widget="41289223" async></script>  <link rel="stylesheet" href="styles.css">
+</script>  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div id="vsl-page">
+<div id="vsl-page" data-section="section-1">
+
   <div id="launchBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:11px 16px;text-align:center;position:sticky;top:0;z-index:200">
     <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px">&#127908; Live Delivery Begins In</div>
     <div id="launchClock" style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:#fff">--</div>
@@ -394,7 +394,8 @@
   </footer>
 </div>
 
-<div id="checkout-page">
+<div id="checkout-page" data-section="section-2">
+
   <div class="topbar"><div class="brand">Chatbot Authority</div><div style="display:flex;align-items:center;gap:5px;font-size:13px;color:var(--muted);"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Secure checkout</div></div>
   <div id="deadlineBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:10px 20px;text-align:center">
     <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px">&#9203; Price Locks In</div>
@@ -481,7 +482,7 @@
   </div>
 </div>
 
-<div id="thankyou-page">
+<div id="thankyou-page" data-section="section-3">
   <div class="ty-hero"><div class="container">
     <div class="ty-badge">📋 Submission Received</div>
     <h1 class="ty-headline">SUBMITTED!<br><span class="gold">HANG TIGHT.</span></h1>
@@ -957,5 +958,6 @@
   document.addEventListener('DOMContentLoaded',initFadeIns);
 })();
 </script>
+  <script src="script.js"></script>
 </body>
 </html>
