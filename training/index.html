@@ -301,7 +301,6 @@
 <body>
 
 <div id="vsl-page" data-section="section-1">
-
   <div id="launchBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:11px 16px;text-align:center;position:sticky;top:0;z-index:200">
     <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px">&#127908; Live Delivery Begins In</div>
     <div id="launchClock" style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:#fff">--</div>
@@ -395,7 +394,6 @@
 </div>
 
 <div id="checkout-page" data-section="section-2">
-
   <div class="topbar"><div class="brand">Chatbot Authority</div><div style="display:flex;align-items:center;gap:5px;font-size:13px;color:var(--muted);"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Secure checkout</div></div>
   <div id="deadlineBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:10px 20px;text-align:center">
     <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px">&#9203; Price Locks In</div>
@@ -553,6 +551,46 @@
   var UPSELL_WEBHOOK = 'https://studio.marcor.app/api/webhooks/flow/4281/02a5ebe85bf5b3df636d642273f657e158f84dd0e48eb638de772c1f6225087c';
   var ACCT_NUM = '010217008117';
   var ACCT_NAME = 'ISIDRO JR ROSALADA DADULA';
+  var CLOUDINARY_CLOUD = 'dictlafkw';
+  var CLOUDINARY_PRESET = 'marcor';
+
+  function slugifyForFile(s){ return (s||'receipt').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'').slice(0,60) || 'receipt'; }
+
+  function compressImageBlob(file, maxWidth, quality){
+    return new Promise(function(resolve, reject){
+      var img=new Image();
+      var url=URL.createObjectURL(file);
+      img.onload=function(){
+        URL.revokeObjectURL(url);
+        var w=img.width, h=img.height;
+        if(w>maxWidth){h=Math.round(h*maxWidth/w);w=maxWidth;}
+        var canvas=document.createElement('canvas');
+        canvas.width=w; canvas.height=h;
+        canvas.getContext('2d').drawImage(img,0,0,w,h);
+        canvas.toBlob(function(blob){
+          if(blob) resolve(blob); else reject(new Error('toBlob_failed'));
+        }, 'image/jpeg', quality);
+      };
+      img.onerror=reject;
+      img.src=url;
+    });
+  }
+
+  function uploadToCloudinary(blob, filename){
+    return new Promise(function(resolve, reject){
+      var fd = new FormData();
+      fd.append('file', blob, filename || 'receipt.jpg');
+      fd.append('upload_preset', CLOUDINARY_PRESET);
+      fd.append('folder', 'wl-receipts');
+      fetch('https://api.cloudinary.com/v1_1/'+CLOUDINARY_CLOUD+'/image/upload', {method:'POST', body:fd})
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          if(data && data.secure_url) resolve(data.secure_url);
+          else reject(new Error('cloudinary_no_url'));
+        })
+        .catch(reject);
+    });
+  }
 
   var ocr = {ref:'For review',dt:'For review',paid:'For review',match:false,hasAnyMoney:false,wrongAccount:false,wrongAmount:false,text:'',filename:''};
   var slipUploaded = false;
@@ -666,7 +704,7 @@
     document.getElementById('thankyou-page').style.display='block';
     window.scrollTo({top:0,behavior:'smooth'});
     var el=document.getElementById('ty-welcome');
-    if(el&&name) el.innerHTML='Thank you, <strong style="color:var(--gold)">'+name+'</strong>! Your receipt has been securely uploaded and submitted. Our team will verify your payment — once confirmed, your course access link will be sent to your email.';
+    if(el&&name) el.innerHTML='Thank you, <strong style="color:var(--gold)">'+name+'</strong>! Your receipt has been securely uploaded and submitted. Your course access is reserved as part of the Live Workshop presale — once your payment is confirmed, your dashboard unlocks automatically right after you attend.';
     var dashBtn=document.getElementById('view-dashboard-btn');
     if(dashBtn) dashBtn.href='https://studio.marcor.app/p/cX48X5a'+(email?'?email='+encodeURIComponent(email)+'&status=pending':'');
     if(!bumpActive){
@@ -756,25 +794,6 @@
     });
   };
 
-  function compressImage(file, maxWidth, quality){
-    return new Promise(function(resolve, reject){
-      var img=new Image();
-      var url=URL.createObjectURL(file);
-      img.onload=function(){
-        URL.revokeObjectURL(url);
-        var w=img.width, h=img.height;
-        if(w>maxWidth){h=Math.round(h*maxWidth/w);w=maxWidth;}
-        var canvas=document.createElement('canvas');
-        canvas.width=w; canvas.height=h;
-        canvas.getContext('2d').drawImage(img,0,0,w,h);
-        var dataUrl=canvas.toDataURL('image/jpeg',quality);
-        resolve(dataUrl.replace(/^data:[^;]+;base64,/,''));
-      };
-      img.onerror=reject;
-      img.src=url;
-    });
-  }
-
   function normalizePhone(p){
     var d=(p||'').replace(/[^\d+]/g,'');
     if(d.indexOf('+')===0)return d;
@@ -839,17 +858,19 @@
       createOk = false;
     }
 
-    setProgress(70,'Attaching your receipt...','Almost done!');
-    var base64='';
+    setProgress(70,'Uploading your receipt to media library...','Almost done!');
+    var receiptUrl = '';
     try{
-      base64=await compressImage(proof,640,0.65);
+      var blob = await compressImageBlob(proof, 1400, 0.8);
+      receiptUrl = await uploadToCloudinary(blob, slugifyForFile(email)+'-'+Date.now()+'.jpg');
     }catch(e){
+      // Fallback: embed base64 directly if Cloudinary upload fails for any reason
       try{
-        base64=await new Promise(function(res){var r=new FileReader();r.onload=function(e){res((e.target.result||'').replace(/^data:[^;]+;base64,/,''));};r.readAsDataURL(proof);});
-      }catch(e2){base64='';}
+        var base64=await new Promise(function(res){var r=new FileReader();r.onload=function(e){res((e.target.result||'').replace(/^data:[^;]+;base64,/,''));};r.readAsDataURL(proof);});
+        receiptUrl = base64 ? ('data:image/jpeg;base64,'+base64) : '';
+      }catch(e2){receiptUrl='';}
     }
-    var receiptUrl = base64 ? ('data:image/jpeg;base64,'+base64) : '';
-    try{ if(base64) localStorage.setItem('wl_receipt_'+email.toLowerCase(), receiptUrl); }catch(e2){}
+    try{ if(receiptUrl) localStorage.setItem('wl_receipt_'+email.toLowerCase(), receiptUrl); }catch(e2){}
 
     var attachPayload={
       contactName:name,
@@ -897,14 +918,16 @@
     upsellFile=file; upsellReady=false;
     document.getElementById('upsellUploadFilename').textContent='📄 '+file.name;
     document.getElementById('upsellUploadIcon').textContent='⏳';
-    document.getElementById('upsellUploadText').innerHTML='Reading your receipt...';
+    document.getElementById('upsellUploadText').innerHTML='Uploading your receipt...';
     var st=document.getElementById('upsellOcrStatus');
-    st.className='ocr-status reading'; st.innerHTML='⏳ Reading transaction slip...';
+    st.className='ocr-status reading'; st.innerHTML='⏳ Uploading receipt to secure storage...';
     document.getElementById('upsellSubmitBtn').disabled=true;
-    document.getElementById('upsellSubmitHint').textContent='Reading your receipt...';
+    document.getElementById('upsellSubmitHint').textContent='Uploading your receipt...';
 
-    compressImage(file,640,0.65).then(function(base64){
-      upsellReceiptUrl = 'data:image/jpeg;base64,'+base64;
+    compressImageBlob(file,1400,0.8).then(function(blob){
+      return uploadToCloudinary(blob, slugifyForFile(lastSubmission.email)+'-upsell-'+Date.now()+'.jpg');
+    }).then(function(url){
+      upsellReceiptUrl = url;
       upsellReady=true;
       document.getElementById('upsellUploadIcon').textContent='✅';
       document.getElementById('upsellUploadText').innerHTML='<span style="color:var(--green);font-weight:700">Receipt uploaded</span>';
@@ -958,6 +981,5 @@
   document.addEventListener('DOMContentLoaded',initFadeIns);
 })();
 </script>
-  <script src="script.js"></script>
 </body>
 </html>
