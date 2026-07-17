@@ -804,10 +804,10 @@
   }
 
   window.addEventListener('error', function(e){
-    try{ alert('DEBUG - Page error: ' + (e && e.message ? e.message : 'unknown error')); }catch(_e){}
+    try{ console.error('Page error:', (e && e.message ? e.message : 'unknown error')); }catch(_e){}
   });
   window.addEventListener('unhandledrejection', function(e){
-    try{ alert('DEBUG - Promise error: ' + (e && e.reason ? (e.reason.message||e.reason) : 'unknown error')); }catch(_e){}
+    try{ console.error('Promise error:', (e && e.reason ? (e.reason.message||e.reason) : 'unknown error')); }catch(_e){}
   });
 
   window.submitPayment=async function(){
@@ -848,17 +848,16 @@
       }
     };
     var createOk = false;
-    var createErr = 'unknown';
     try{
       var res1 = await Promise.race([
         fetch(CREATE_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(createPayload),keepalive:true}),
-        new Promise(function(_,rej){setTimeout(function(){rej(new Error('create-timeout-8s'));},8000);})
+        new Promise(function(_,rej){setTimeout(function(){rej(new Error('create-timeout-20s'));},20000);})
       ]);
       createOk = true;
-      createErr = 'HTTP ' + (res1 && res1.status ? res1.status : '?') + (res1 && res1.ok ? ' (ok)' : ' (not ok)');
+      console.log('Enrollment create OK', res1 && res1.status);
     }catch(e1){
       createOk = false;
-      createErr = (e1 && e1.name ? e1.name + ': ' : '') + (e1 && e1.message ? e1.message : String(e1));
+      console.error('Enrollment create not confirmed within 20s (fetch keeps running in background):', e1);
     }
 
     setProgress(70,'Uploading your receipt to media library...','Almost done!');
@@ -891,12 +890,11 @@
     }catch(e){}
 
     setProgress(100,'Done! ✓','');
-    if(!createOk){
-      alert('DEBUG - Enrollment create failed.\nError: ' + createErr + '\nURL: ' + CREATE_WEBHOOK);
-    }
     setTimeout(function(){hideProgress();showThankYou(name,email);},400);
    }catch(outerErr){
-    alert('DEBUG - submitPayment crashed: ' + (outerErr && outerErr.message ? outerErr.message : outerErr));
+    console.error('submitPayment crashed:', outerErr);
+    var hintEl=document.getElementById('submitHint');
+    if(hintEl){ hintEl.textContent='Something went wrong — please try again, or contact dijae@dijaedadula.com if it persists.'; hintEl.style.color='var(--red)'; }
     var btn2=document.getElementById('submitBtn');
     if(btn2) btn2.disabled=false;
    }
