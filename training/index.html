@@ -848,14 +848,17 @@
       }
     };
     var createOk = false;
+    var createErr = 'unknown';
     try{
       var res1 = await Promise.race([
         fetch(CREATE_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(createPayload),keepalive:true}),
-        new Promise(function(_,rej){setTimeout(function(){rej(new Error('create-timeout'));},8000);})
+        new Promise(function(_,rej){setTimeout(function(){rej(new Error('create-timeout-8s'));},8000);})
       ]);
       createOk = true;
+      createErr = 'HTTP ' + (res1 && res1.status ? res1.status : '?') + (res1 && res1.ok ? ' (ok)' : ' (not ok)');
     }catch(e1){
       createOk = false;
+      createErr = (e1 && e1.name ? e1.name + ': ' : '') + (e1 && e1.message ? e1.message : String(e1));
     }
 
     setProgress(70,'Uploading your receipt to media library...','Almost done!');
@@ -864,7 +867,6 @@
       var blob = await compressImageBlob(proof, 1400, 0.8);
       receiptUrl = await uploadToCloudinary(blob, slugifyForFile(email)+'-'+Date.now()+'.jpg');
     }catch(e){
-      // Fallback: embed base64 directly if Cloudinary upload fails for any reason
       try{
         var base64=await new Promise(function(res){var r=new FileReader();r.onload=function(e){res((e.target.result||'').replace(/^data:[^;]+;base64,/,''));};r.readAsDataURL(proof);});
         receiptUrl = base64 ? ('data:image/jpeg;base64,'+base64) : '';
@@ -890,7 +892,7 @@
 
     setProgress(100,'Done! ✓','');
     if(!createOk){
-      alert('DEBUG - The enrollment request could not be confirmed (network error or timeout). Please try again, or contact dijae@dijaedadula.com directly with a screenshot of this message.');
+      alert('DEBUG - Enrollment create failed.\nError: ' + createErr + '\nURL: ' + CREATE_WEBHOOK);
     }
     setTimeout(function(){hideProgress();showThankYou(name,email);},400);
    }catch(outerErr){
