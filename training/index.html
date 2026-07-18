@@ -302,8 +302,7 @@
     }
   });
 })();
-</script>
-<script src="https://studio.marcor.app/widget.js" data-widget="41289223" async></script>  <link rel="stylesheet" href="styles.css">
+</script>  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -560,6 +559,7 @@
   var ACCT_NAME = 'ISIDRO JR ROSALADA DADULA';
   var CLOUDINARY_CLOUD = 'dictlafkw';
   var CLOUDINARY_PRESET = 'marcor';
+  var SHEET_ID = '1186Dli-VIEULHcw3xhR-1uHoU6y10Qmv-AaUVYewef8';
 
   function slugifyForFile(s){ return (s||'receipt').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'').slice(0,60) || 'receipt'; }
 
@@ -603,7 +603,10 @@
   var slipUploaded = false;
   var cachedFile = null;
 
-  var LAUNCH_TARGET = new Date('2026-07-18T10:00:00+08:00').getTime();
+  // ── SCHEDULE: single source of truth is the Google Sheet "Settings" tab,
+  // key "workshop_date". Fallback below is used only until that fetch resolves
+  // (or if the fetch fails), so the countdown never shows blank.
+  var LAUNCH_TARGET = new Date('2026-07-24T20:00:00+08:00').getTime();
   function padL(n){return n<10?'0'+n:''+n;}
   function tickLaunch(){
     var remaining = LAUNCH_TARGET - Date.now();
@@ -616,6 +619,27 @@
   }
   tickLaunch();
   var launchTimer = setInterval(tickLaunch, 1000);
+
+  (function loadScheduleFromSheet(){
+    try{
+      var gurl='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=Settings&_='+Date.now();
+      fetch(gurl,{cache:'no-store'}).then(function(r){return r.ok?r.text():null;}).then(function(raw){
+        if(!raw)return;
+        var json=raw.replace(/^[^(]+\(/,'').replace(/\);?\s*$/,'');
+        var parsed=JSON.parse(json);
+        var t=parsed.table;
+        if(!t||!t.rows)return;
+        var h=t.cols.map(function(c){return(c.label||c.id||'').trim();});
+        var rows=t.rows.map(function(r){var o={};h.forEach(function(k,i){o[k]=(r.c&&r.c[i]&&r.c[i].v!=null)?String(r.c[i].v).trim():'';});return o;});
+        var found=null;
+        rows.forEach(function(r){ if((r.Key||'').trim()==='workshop_date' && r.Value) found=r.Value.trim(); });
+        if(found){
+          var parsedDate=Date.parse(found);
+          if(!isNaN(parsedDate)){ LAUNCH_TARGET=parsedDate; tickLaunch(); }
+        }
+      }).catch(function(){});
+    }catch(e){}
+  })();
 
   window.goToCheckout = function(){document.getElementById('vsl-page').style.display='none';document.getElementById('checkout-page').style.display='block';window.scrollTo({top:0,behavior:'smooth'});initPricing();};
 
