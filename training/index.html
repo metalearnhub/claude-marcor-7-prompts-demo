@@ -308,15 +308,17 @@
 <body>
 
 <div id="vsl-page" data-section="section-1">
-  <div id="launchBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:11px 16px;text-align:center;position:sticky;top:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center">
-    <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px">&#127908; Live Delivery Begins In</div>
-    <div id="launchClock" style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:#fff">--</div>
+  <div id="launchBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:11px 16px;text-align:center;position:sticky;top:0;z-index:200">
+    <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px;text-align:center">&#127908; Live Delivery Begins In</div>
+    <div id="launchClock" style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:#fff;text-align:center">--</div>
+    <div id="launchDateText" style="font-size:10px;color:rgba(255,255,255,.7);margin-top:2px;text-align:center">Friday, July 24 · 8:00 PM (Manila)</div>
   </div>
   <header class="hero"><div class="hero-inner">
     <div class="brand-badge"><span class="brand-badge-dot"></span>Chatbot Authority — Paid Micro-Course</div>
     <span class="hero-label">Now Enrolling</span>
     <h1 class="hero-title"><span class="line-gold">WHISPER</span><br><span style="color:var(--white)">&amp; LAUNCH</span></h1>
     <span class="hero-subtitle-line">Build your AI sales assistant in one coffee session</span>
+    <div class="hero-date-pill" id="heroWorkshopDate">&#128197; Live Workshop: Friday, July 24 · 8:00 PM (Manila)</div>
     <div class="video-wrapper fade-in">
       <video controls preload="metadata" playsinline style="width:100%;display:block;background:#000;"><source src="https://studio.marcor.app/objects/quick-uploads/69/ec1aa58d67f5d3ee.mp4" type="video/mp4"></video>
       <div class="video-bar"><span class="video-bar-text">Dijae Dadula · Chatbot Authority: Whisper &amp; Launch</span><span class="video-bar-tag">Watch First</span></div>
@@ -382,6 +384,7 @@
       <span class="cta-price" id="vslPriceMain" style="margin-bottom:0">₱699</span>
     </div>
     <div class="cta-price-sub" id="vslPriceSub">Chatbot Authority: Whisper &amp; Launch · Save ₱300 today only</div>
+    <div style="text-align:center;font-size:12px;color:var(--gold-light);margin-bottom:20px" id="ctaWorkshopDate">🗓️ Live Workshop: Friday, July 24 · 8:00 PM (Manila)</div>
     <ul class="cta-features">
       <li><span>✦</span>4 complete micro-lessons (6-8 min each)</li>
       <li><span>✦</span>AI Assistant Purpose Statement framework</li>
@@ -403,8 +406,8 @@
 <div id="checkout-page" data-section="section-2">
   <div class="topbar"><div class="brand">Chatbot Authority</div><div style="display:flex;align-items:center;gap:5px;font-size:13px;color:var(--muted);"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Secure checkout</div></div>
   <div id="deadlineBar" style="background:linear-gradient(90deg,#3a1f6b,#5a2f9b,#3a1f6b);border-bottom:2px solid var(--gold);padding:10px 20px;text-align:center">
-    <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px">&#9203; Price Locks In</div>
-    <div id="deadlineClock" style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.06em;color:#fff">14:00</div>
+    <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:2px;text-align:center">&#9203; Price Locks In</div>
+    <div id="deadlineClock" style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.06em;color:#fff;text-align:center">14:00</div>
   </div>
   <div class="co-container">
     <button class="co-back" onclick="backToVSL()">← Back to course</button>
@@ -415,6 +418,7 @@
       <div class="price-main" id="priceMain" style="margin-bottom:0">₱699</div>
     </div>
     <div class="price-desc" id="priceDesc">Today's price · Goes to ₱999 when the timer above hits zero</div>
+    <div style="font-size:12px;color:var(--gold-light);margin-bottom:16px" id="coWorkshopDate">🗓️ Live Workshop: Friday, July 24 · 8:00 PM (Manila)</div>
     <div class="order-summary">
       <div class="order-row"><span>Whisper &amp; Launch Course</span><span id="orderCourseAmt">₱699</span></div>
       <div class="order-row order-total"><span>Total due today</span><span class="amount" id="orderTotalAmt">₱699</span></div>
@@ -609,6 +613,21 @@
   // (or if the fetch fails), so the countdown never shows blank.
   var LAUNCH_TARGET = new Date('2026-07-24T20:00:00+08:00').getTime();
   function padL(n){return n<10?'0'+n:''+n;}
+  function fmtLaunchDate(ts){
+    try{
+      var d = new Date(ts);
+      var opts = {weekday:'long', month:'long', day:'numeric', hour:'numeric', minute:'2-digit', hour12:true, timeZone:'Asia/Manila'};
+      return d.toLocaleString('en-US', opts) + ' (Manila)';
+    }catch(e){ return ''; }
+  }
+  function renderLaunchDateText(){
+    var txt = fmtLaunchDate(LAUNCH_TARGET);
+    if(!txt) return;
+    var a=document.getElementById('launchDateText'); if(a) a.textContent=txt;
+    var b=document.getElementById('heroWorkshopDate'); if(b) b.innerHTML='&#128197; Live Workshop: '+txt;
+    var c=document.getElementById('ctaWorkshopDate'); if(c) c.textContent='\uD83D\uDDD3\uFE0F Live Workshop: '+txt;
+    var e=document.getElementById('coWorkshopDate'); if(e) e.textContent='\uD83D\uDDD3\uFE0F Live Workshop: '+txt;
+  }
   function tickLaunch(){
     var remaining = LAUNCH_TARGET - Date.now();
     var bar = document.getElementById('launchBar');
@@ -619,6 +638,7 @@
     if(clk) clk.textContent = d+'d '+padL(h)+'h '+padL(m)+'m '+padL(s)+'s';
   }
   tickLaunch();
+  renderLaunchDateText();
   var launchTimer = setInterval(tickLaunch, 1000);
 
   (function loadScheduleFromSheet(){
@@ -636,7 +656,7 @@
         rows.forEach(function(r){ if((r.Key||'').trim()==='workshop_date' && r.Value) found=r.Value.trim(); });
         if(found){
           var parsedDate=Date.parse(found);
-          if(!isNaN(parsedDate)){ LAUNCH_TARGET=parsedDate; tickLaunch(); }
+          if(!isNaN(parsedDate)){ LAUNCH_TARGET=parsedDate; tickLaunch(); renderLaunchDateText(); }
         }
       }).catch(function(){});
     }catch(e){}
