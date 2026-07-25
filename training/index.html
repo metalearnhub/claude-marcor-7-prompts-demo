@@ -608,10 +608,12 @@
   var slipUploaded = false;
   var cachedFile = null;
 
-  // ── SCHEDULE: single source of truth is the Google Sheet "Settings" tab,
-  // key "workshop_date". Fallback below is used only until that fetch resolves
-  // (or if the fetch fails), so the countdown never shows blank.
+  // ── SCHEDULE + BATCH: single source of truth is the Google Sheet "Settings"
+  // tab. "workshop_date" drives the countdown; "active_batch_id" is stamped
+  // onto every new enrollment so the LMS only shows the live class to
+  // students whose enrollment batch matches an enabled LiveSessions row.
   var LAUNCH_TARGET = new Date('2026-07-24T20:00:00+08:00').getTime();
+  var CURRENT_BATCH_ID = '2026-07-24';
   function padL(n){return n<10?'0'+n:''+n;}
   function fmtLaunchDate(ts){
     try{
@@ -623,7 +625,6 @@
   function renderLaunchDateText(){
     var txt = fmtLaunchDate(LAUNCH_TARGET);
     if(!txt)return;
-    var ids = ['launchDateText'];
     var a=document.getElementById('launchDateText'); if(a) a.textContent = txt;
     var b=document.getElementById('heroWorkshopDate'); if(b) b.innerHTML = '&#128197; Live Workshop: '+txt;
     var c=document.getElementById('ctaWorkshopDate'); if(c) c.innerHTML = '&#128197; Live Workshop: '+txt;
@@ -654,7 +655,11 @@
         var h=t.cols.map(function(c){return(c.label||c.id||'').trim();});
         var rows=t.rows.map(function(r){var o={};h.forEach(function(k,i){o[k]=(r.c&&r.c[i]&&r.c[i].v!=null)?String(r.c[i].v).trim():'';});return o;});
         var found=null;
-        rows.forEach(function(r){ if((r.Key||'').trim()==='workshop_date' && r.Value) found=r.Value.trim(); });
+        rows.forEach(function(r){
+          var key=(r.Key||'').trim();
+          if(key==='workshop_date' && r.Value) found=r.Value.trim();
+          if(key==='active_batch_id' && r.Value) CURRENT_BATCH_ID=r.Value.trim();
+        });
         if(found){
           var parsedDate=Date.parse(found);
           if(!isNaN(parsedDate)){ LAUNCH_TARGET=parsedDate; tickLaunch(); renderLaunchDateText(); }
@@ -897,7 +902,8 @@
         order_type:orderType,
         total_amount:'\u20b1'+finalTotal.toLocaleString('en-PH'),
         total_amount_num:String(finalTotal),
-        proof_filename:ocr.filename
+        proof_filename:ocr.filename,
+        batch:CURRENT_BATCH_ID
       }
     };
     var createOk = false;
