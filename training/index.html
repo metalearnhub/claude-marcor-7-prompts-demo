@@ -319,8 +319,11 @@
     <h1 class="hero-title"><span class="line-gold">WHISPER</span><br><span style="color:var(--white)">&amp; LAUNCH</span></h1>
     <span class="hero-subtitle-line">Build your AI sales assistant in one coffee session</span>
     <div id="heroWorkshopDate" class="hero-date-pill">&#128197; Live Workshop: Friday, July 24 · 8:00 PM (Manila)</div>
-    <div class="video-wrapper fade-in">
-      <video controls preload="metadata" playsinline style="width:100%;display:block;background:#000;"><source src="https://studio.marcor.app/objects/quick-uploads/69/ec1aa58d67f5d3ee.mp4" type="video/mp4"></video>
+    <div class="video-wrapper fade-in" style="position:relative">
+      <video id="heroVideo" controls autoplay muted playsinline preload="auto" style="width:100%;display:block;background:#000;"><source src="https://studio.marcor.app/objects/quick-uploads/69/ec1aa58d67f5d3ee.mp4" type="video/mp4"></video>
+      <div id="unmuteOverlay" onclick="var v=document.getElementById('heroVideo');v.muted=false;this.style.display='none';" style="position:absolute;top:0;left:0;right:0;bottom:52px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,.15)">
+        <div style="background:rgba(10,10,10,.85);border:1px solid var(--border);border-radius:100px;padding:12px 24px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:#fff">🔊 Tap for sound</div>
+      </div>
       <div class="video-bar"><span class="video-bar-text">Dijae Dadula · Chatbot Authority: Whisper &amp; Launch</span><span class="video-bar-tag">Watch First</span></div>
     </div>
   </div></header>
@@ -437,7 +440,7 @@
             <div style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:rgba(244,242,238,.85)"><span style="color:var(--gold);flex-shrink:0">&#9670;</span><span>Lifetime access to the private Discord community</span></div>
             <div style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:rgba(244,242,238,.85)"><span style="color:var(--gold);flex-shrink:0">&#9670;</span><span>Lifetime Founder's Access to the AI Agent Orchestrator System <span style="color:var(--gold-light);font-weight:700">(worth ₱56,880/year)</span></span></div>
           </div>
-          <div style="font-size:12px;color:var(--muted)">Adds <strong style="color:var(--gold-light);font-size:14px">₱2,299</strong> — total becomes <strong id="bumpTotalPreview" style="color:var(--gold-light);font-size:14px">₱2,998</strong> today</div>
+          <div style="font-size:12px;color:var(--muted)">Adds <strong id="bumpAddAmount" style="color:var(--gold-light);font-size:14px">₱2,299</strong> — total becomes <strong id="bumpTotalPreview" style="color:var(--gold-light);font-size:14px">₱2,998</strong> today</div>
         </div>
       </div>
     </div>
@@ -519,8 +522,8 @@
           <div style="font-size:13px;color:var(--muted);margin-top:6px">Recordings + Lifetime Discord + Lifetime Founder's Access to the AI Agent Orchestrator System <span style="color:var(--gold-light);font-weight:700">(worth ₱56,880/year)</span></div>
         </div>
         <div style="display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:14px">
-          <span style="font-size:16px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--red)">₱2,299</span>
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--gold)">₱1,999</span>
+          <span id="upsellStrike" style="font-size:16px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--red)">₱2,299</span>
+          <span id="upsellPrice" style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--gold)">₱1,999</span>
           <span style="font-size:11px;color:var(--muted)">add-on only</span>
         </div>
         <button id="upsellToggleBtn" onclick="toggleUpsellPay()" style="width:100%;background:linear-gradient(135deg,#c4a020,var(--gold),#f0d060);border:none;border-radius:10px;padding:15px;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.05em;color:#0a0a0a;cursor:pointer;margin-bottom:6px">🔓 YES — ADD FOR ₱1,999</button>
@@ -533,7 +536,7 @@
             <div class="acct-row"><span class="acct-label">Account Name</span><span class="acct-val">ISIDRO JR ROSALADA DADULA</span></div>
             <div class="acct-row"><span class="acct-label">Account Number</span><span class="acct-val copyable" onclick="copyAcct(this)">010217008117 <span class="copy-hint">tap to copy</span></span></div>
             <div class="acct-row"><span class="acct-label">Bank</span><span class="acct-val">GoTyme Bank</span></div>
-            <div class="acct-row"><span class="acct-label">Amount to Send</span><span class="acct-val acct-amount">₱1,999</span></div>
+            <div class="acct-row"><span class="acct-label">Amount to Send</span><span class="acct-val acct-amount" id="upsellAcctAmount">₱1,999</span></div>
           </div>
           <div class="upload-zone" id="upsellUploadZone" style="margin-top:12px">
             <input type="file" id="upsell-proof" accept="image/*" onchange="handleUpsellUpload(this)">
@@ -608,12 +611,18 @@
   var slipUploaded = false;
   var cachedFile = null;
 
-  // ── SCHEDULE + BATCH: single source of truth is the Google Sheet "Settings"
-  // tab. "workshop_date" drives the countdown; "active_batch_id" is stamped
-  // onto every new enrollment so the LMS only shows the live class to
-  // students whose enrollment batch matches an enabled LiveSessions row.
+  // ── SCHEDULE + BATCH + PRICING: single source of truth is the Google Sheet
+  // "Settings" tab. All of these are read once on page load and applied —
+  // change any value in the sheet, no code push needed, both this page and
+  // the LMS pick it up on next load.
   var LAUNCH_TARGET = new Date('2026-07-24T20:00:00+08:00').getTime();
   var CURRENT_BATCH_ID = '2026-07-24';
+  var PRICE_EARLY = 699;
+  var PRICE_REGULAR = 999;
+  var PRICE_BUMP = 2299;
+  var PRICE_DOWNSELL = 1999;
+  var TIMER_MINUTES = 14;
+
   function padL(n){return n<10?'0'+n:''+n;}
   function fmtLaunchDate(ts){
     try{
@@ -643,6 +652,7 @@
   renderLaunchDateText();
   var launchTimer = setInterval(tickLaunch, 1000);
 
+  var settingsLoaded = false;
   (function loadScheduleFromSheet(){
     try{
       var gurl='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json&sheet=Settings&_='+Date.now();
@@ -657,20 +667,37 @@
         var found=null;
         rows.forEach(function(r){
           var key=(r.Key||'').trim();
-          if(key==='workshop_date' && r.Value) found=r.Value.trim();
-          if(key==='active_batch_id' && r.Value) CURRENT_BATCH_ID=r.Value.trim();
+          var val=(r.Value||'').trim();
+          if(key==='workshop_date' && val) found=val;
+          if(key==='active_batch_id' && val) CURRENT_BATCH_ID=val;
+          if(key==='price_early' && val && !isNaN(parseFloat(val))) PRICE_EARLY=parseFloat(val);
+          if(key==='price_regular' && val && !isNaN(parseFloat(val))) PRICE_REGULAR=parseFloat(val);
+          if(key==='price_bump' && val && !isNaN(parseFloat(val))) PRICE_BUMP=parseFloat(val);
+          if(key==='price_downsell' && val && !isNaN(parseFloat(val))) PRICE_DOWNSELL=parseFloat(val);
+          if(key==='price_timer_minutes' && val && !isNaN(parseFloat(val))) TIMER_MINUTES=parseFloat(val);
         });
         if(found){
           var parsedDate=Date.parse(found);
           if(!isNaN(parsedDate)){ LAUNCH_TARGET=parsedDate; tickLaunch(); renderLaunchDateText(); }
         }
-      }).catch(function(){});
-    }catch(e){}
+        settingsLoaded = true;
+        renderDownsellPrices();
+        updatePriceDisplay();
+      }).catch(function(){ settingsLoaded = true; });
+    }catch(e){ settingsLoaded = true; }
   })();
+
+  function renderDownsellPrices(){
+    var el;
+    el=document.getElementById('bumpAddAmount'); if(el) el.textContent=fmtPeso(PRICE_BUMP);
+    el=document.getElementById('upsellStrike'); if(el) el.textContent=fmtPeso(PRICE_BUMP);
+    el=document.getElementById('upsellPrice'); if(el) el.textContent=fmtPeso(PRICE_DOWNSELL);
+    el=document.getElementById('upsellToggleBtn'); if(el) el.textContent='\uD83D\uDD13 YES — ADD FOR '+fmtPeso(PRICE_DOWNSELL);
+    el=document.getElementById('upsellAcctAmount'); if(el) el.textContent=fmtPeso(PRICE_DOWNSELL);
+  }
 
   window.goToCheckout = function(){document.getElementById('vsl-page').style.display='none';document.getElementById('checkout-page').style.display='block';window.scrollTo({top:0,behavior:'smooth'});initPricing();renderLaunchDateText();};
 
-  var DEADLINE_MS = 14 * 60 * 1000;
   var bumpActive = false;
   var priceTimer = null;
   var currentBasePrice = 699;
@@ -678,6 +705,7 @@
   function getCookie(name){var m=document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)');return m?m.pop():null;}
   function setCookie(name,value,days){var d=new Date();d.setTime(d.getTime()+(days*24*60*60*1000));document.cookie=name+'='+value+';expires='+d.toUTCString()+';path=/;SameSite=Lax';}
 
+  var priceDeadline = null;
   function getDeadline(){
     try{
       if(new URLSearchParams(window.location.search).get('reset')==='1'){
@@ -688,34 +716,36 @@
     var v=null;
     try{ v=localStorage.getItem('wl_price_deadline'); }catch(e){}
     if(!v) v=getCookie('wl_pd');
-    if(!v){ v=String(Date.now()+DEADLINE_MS); }
+    if(!v){ v=String(Date.now()+TIMER_MINUTES*60*1000); }
     try{ localStorage.setItem('wl_price_deadline', v); }catch(e){}
     setCookie('wl_pd', v, 365);
     return parseInt(v,10);
   }
-  var priceDeadline = getDeadline();
 
   function pad(n){return n<10?'0'+n:''+n;}
-  function fmtPeso(n){return '₱'+n.toLocaleString('en-PH');}
+  function fmtPeso(n){return '₱'+Math.round(n).toLocaleString('en-PH');}
 
   function updatePriceDisplay(){
-    var total = currentBasePrice + (bumpActive?2299:0);
+    var total = currentBasePrice + (bumpActive?PRICE_BUMP:0);
     var el;
     el=document.getElementById('priceMain'); if(el) el.textContent=fmtPeso(currentBasePrice);
     el=document.getElementById('orderCourseAmt'); if(el) el.textContent=fmtPeso(currentBasePrice);
     el=document.getElementById('orderTotalAmt'); if(el) el.textContent=fmtPeso(total);
     el=document.getElementById('acctAmount'); if(el) el.textContent=fmtPeso(total);
     el=document.getElementById('stepAmount'); if(el) el.textContent='exact amount: '+fmtPeso(total);
-    el=document.getElementById('bumpTotalPreview'); if(el) el.textContent=fmtPeso(currentBasePrice+2299);
-    el=document.getElementById('vslPriceMain'); if(el) el.textContent=fmtPeso(currentBasePrice);
-    el=document.getElementById('vslEnrollBtn'); if(el) el.textContent='ENROLL NOW — '+fmtPeso(currentBasePrice)+' ☕';
+    el=document.getElementById('bumpTotalPreview'); if(el) el.textContent=fmtPeso(currentBasePrice+PRICE_BUMP);
+    el=document.getElementById('bumpAddAmount'); if(el) el.textContent=fmtPeso(PRICE_BUMP);
+    el=document.getElementById('vslPriceMain'); if(el) el.textContent=fmtPeso(PRICE_EARLY);
+    el=document.getElementById('vslPriceStrike'); if(el) el.textContent=fmtPeso(PRICE_REGULAR);
+    el=document.getElementById('priceStrike'); if(el) el.textContent=fmtPeso(PRICE_REGULAR);
+    el=document.getElementById('vslEnrollBtn'); if(el) el.textContent='ENROLL NOW — '+fmtPeso(PRICE_EARLY)+' ☕';
   }
 
   function tickPrice(){
     var remaining = priceDeadline - Date.now();
     var bar = document.getElementById('deadlineBar');
     if(remaining <= 0){
-      currentBasePrice = 999;
+      currentBasePrice = PRICE_REGULAR;
       bumpActive = false;
       if(bar) bar.style.display='none';
       var strikeEl=document.getElementById('priceStrike'); if(strikeEl) strikeEl.style.display='none';
@@ -727,13 +757,14 @@
       clearInterval(priceTimer);
       return;
     }
-    currentBasePrice = 699;
+    currentBasePrice = PRICE_EARLY;
     var totalSec=Math.floor(remaining/1000), m=Math.floor(totalSec/60), s=totalSec%60;
     var clk=document.getElementById('deadlineClock'); if(clk) clk.textContent=pad(m)+':'+pad(s);
     updatePriceDisplay();
   }
 
   function initPricing(){
+    if(priceDeadline===null) priceDeadline = getDeadline();
     tickPrice();
     if(!priceTimer) priceTimer = setInterval(tickPrice, 1000);
   }
@@ -768,6 +799,7 @@
     if(!bumpActive){
       var up=document.getElementById('upsellSection');
       if(up) up.style.display='block';
+      renderDownsellPrices();
     }
     setTimeout(initFadeIns,100);
   }
@@ -796,7 +828,7 @@
   function parseRef(t){var m=t.match(/(?:ref(?:erence)?\s*(?:no\.?|number)?|trace\s*(?:no\.?)?|transaction\s*(?:id|no\.?|number)?)[^\dA-Z]{0,30}((?:[A-Z0-9]{2,}[\s-]*){2,})/i);if(m){var d=digs(m[1]);if(d.length>=8)return d;}m=t.match(/\b(?:\d{4}[\s-]){2,4}\d{2,8}\b/);if(m)return digs(m[0]);m=t.match(/\b\d{10,20}\b/);return m?m[0]:'For review';}
   function parseDt(t){var d=(t.match(/\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s*\d{4}\b/i)||t.match(/\b\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}\b/)||[''])[0];var tm=(t.match(/\b\d{1,2}:\d{2}(?::\d{2})?\s*(?:AM|PM|am|pm)?\b/)||[''])[0];return [d,tm].filter(Boolean).join(' ')||'For review';}
   function parseAllMoney(t){var a=[],m,r=/(?:&#8369;|PHP|P)\s*([0-9][0-9,]*(?:\.\d{1,2})?)/gi;while((m=r.exec(t))!==null)a.push(parseFloat(m[1].replace(/,/g,'')));var bare=t.match(/\b\d{3,5}(?:\.\d{1,2})?\b/g)||[];bare.forEach(function(n){var v=parseFloat(n);if(v>=100&&v<=50000)a.push(v);});return a;}
-  function parseMoney(t){var a=[],m,r=/(?:&#8369;|PHP|P)\s*([0-9][0-9,]*(?:\.\d{1,2})?)/gi;while((m=r.exec(t))!==null)a.push(m[1].replace(/,/g,''));if(a.length)return'\u20b1'+a[0];var n=t.match(/\b9[,.]?9[,.]?7(?:\.\d{1,2})?\b/);return n?'\u20b1997':'For review';}
+  function parseMoney(t){var a=[],m,r=/(?:&#8369;|PHP|P)\s*([0-9][0-9,]*(?:\.\d{1,2})?)/gi;while((m=r.exec(t))!==null)a.push(m[1].replace(/,/g,''));if(a.length)return'\u20b1'+a[0];return 'For review';}
   function parseMatch(t){var s=t.toLowerCase().replace(/\s/g,'');return s.indexOf('010217008117')>=0||s.indexOf('isidro')>=0||s.indexOf('dadula')>=0||s.indexOf('gotyme')>=0||s.indexOf('go-tyme')>=0;}
   function parseWrongAccount(t){if(parseMatch(t))return false;var h1=/(?:to|recipient|beneficiary|send\s*to)[^\n]{0,60}\d{10,13}/i.test(t);var h2=/(?:to|recipient|beneficiary)[^\n]{0,60}[A-Z][a-z]+\s+[A-Z][a-z]+/i.test(t);return h1||h2;}
   function isPaymentDoc(t){return /(?:\u20b1|php|gcash|instapay|send|transfer|paid|payment|transaction|receipt|amount|peso)/i.test(t.toLowerCase())&&/\b\d{6,}\b/.test(t);}
@@ -834,7 +866,7 @@
       ocr.text=t;ocr.ref=parseRef(t);ocr.dt=parseDt(t);ocr.paid=parseMoney(t);ocr.match=parseMatch(t);
       if(!isPaymentDoc(t)){setZone('warn','📄','<span style="color:#f0d060;font-weight:700">Could not auto-verify — staff will check</span>');setStatus('warn','<strong>⚠️ We couldn\'t automatically confirm this is a receipt.</strong> You can still submit — our team will manually verify it.');drawSummary(false);slipUploaded=true;setSubmit(true,'Submit for staff review');return;}
       var allAmounts=parseAllMoney(t);ocr.hasAnyMoney=allAmounts.length>0;
-      var expectedTotal=currentBasePrice+(bumpActive?2299:0);
+      var expectedTotal=currentBasePrice+(bumpActive?PRICE_BUMP:0);
       var hasCorrectAmount=false;for(var i=0;i<allAmounts.length;i++){if(allAmounts[i]>=expectedTotal-10&&allAmounts[i]<=expectedTotal+10){hasCorrectAmount=true;break;}}
       ocr.wrongAmount=ocr.hasAnyMoney&&!hasCorrectAmount;ocr.wrongAccount=parseWrongAccount(t);
       var hardErrors=[];
@@ -886,8 +918,8 @@
     btn.disabled=true;
     var notes=(document.getElementById('co-notes').value||'').trim();
 
-    var finalTotal = currentBasePrice + (bumpActive?2299:0);
-    var orderType = (currentBasePrice===699?'Early Price':'Regular Price') + (bumpActive?' + Bump':'');
+    var finalTotal = currentBasePrice + (bumpActive?PRICE_BUMP:0);
+    var orderType = (currentBasePrice===PRICE_EARLY?'Early Price':'Regular Price') + (bumpActive?' + Bump':'');
     var phoneE164 = normalizePhone(phone);
 
     setProgress(30,'Creating your enrollment...','Almost there!');
@@ -900,7 +932,7 @@
         payment_method:'InstaPay',
         course:'Chatbot Authority: Whisper & Launch',
         order_type:orderType,
-        total_amount:'\u20b1'+finalTotal.toLocaleString('en-PH'),
+        total_amount:fmtPeso(finalTotal),
         total_amount_num:String(finalTotal),
         proof_filename:ocr.filename,
         batch:CURRENT_BATCH_ID
@@ -967,7 +999,7 @@
       panel.style.display='block'; btn.textContent='✕ Close';
       panel.scrollIntoView({behavior:'smooth',block:'center'});
     } else {
-      panel.style.display='none'; btn.textContent='🔓 YES — ADD FOR ₱1,999';
+      panel.style.display='none'; btn.textContent='\uD83D\uDD13 YES — ADD FOR '+fmtPeso(PRICE_DOWNSELL);
     }
   };
 
@@ -1016,8 +1048,8 @@
       data:{
         payment_method:'InstaPay',
         course:'Chatbot Authority: Whisper & Launch',
-        order_type:'Post-Purchase Upsell (₱1,999 add-on)',
-        total_amount:'\u20b11,999',
+        order_type:'Post-Purchase Upsell ('+fmtPeso(PRICE_DOWNSELL)+' add-on)',
+        total_amount:fmtPeso(PRICE_DOWNSELL),
         notes:'Post-purchase downsell upgrade',
         proof_filename:upsellFile?upsellFile.name:'',
         receipt_image:upsellReceiptUrl,
